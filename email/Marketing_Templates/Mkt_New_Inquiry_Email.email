@@ -1,0 +1,22 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<p class="p1">Dear {!Contact.FirstName},&nbsp;</p>
+<p class="p2"><br></p>
+<p class="p1">Thank you for reaching out to {!Organization.Name}, we look forward to working with you.</p>
+<p class="p2"><br></p>
+<p class="p1">I would like to introduce myself as your Account Manager. Should you have any questions, please feel free to call me at {!User.Phone} or email me at {!User.Email}.&nbsp;</p>
+<p class="p2"><br></p>
+<p class="p1">You can also contact&nbsp;{!Organization.Name} on the following numbers:&nbsp;</p>
+<p class="p2"><br></p>
+<p class="p1">Main: 810-545-1000&nbsp;</p>
+<p class="p1">Sales: 810-545-1222&nbsp;</p>
+<p class="p1">Customer Service &amp; Support: 810-545-1333&nbsp;</p>
+<p class="p1">Fax: 810-545-1001&nbsp;</p>
+<p class="p2"><br></p>
+<p class="p1">I am confident {!Organization.Name} will serve you well and hope to see our relationship grow over the years.&nbsp;</p>
+<p class="p2"><br></p>
+<p class="p1">Best Regards,&nbsp;</p>
+<p class="p1">{!User.Name}</p>]]></td>
+</tr>
+</table>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Count --></label>
+        <name>advitya__Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- mFields --></label>
+        <name>advitya__mFields__c</name>
+    </fields>
+    <fields>
+        <label><!-- masterJSON --></label>
+        <name>advitya__masterJSON__c</name>
+    </fields>
+</CustomObjectTranslation>

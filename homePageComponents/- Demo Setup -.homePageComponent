@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <links>ReplaceLogo</links>
+    <links>OrgCustomizer4</links>
+    <links>PerfectDateWizard</links>
+    <links>Task_Event_Generator</links>
+    <links>Chatter_Assassin_3</links>
+    <links>Chatter_Charades</links>
+    <links>Replace_Portal_Banner</links>
+    <links>Customer_Welcoming_Message</links>
+    <links>Partner_Welcoming_Message</links>
+    <pageComponentType>links</pageComponentType>
+</HomePageComponent>

@@ -1,0 +1,10 @@
+Hi  Rachit,
+
+Please follow up.
+Name : {!Lead.FirstName} {!Lead.LastName}
+Profile link : {!Lead.Profile_Link__c}
+Salesforce Detaill link : {!Lead.Link}
+
+Regards, 
+Sameer
+Support Team

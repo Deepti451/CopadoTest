@@ -1,0 +1,63 @@
+.THIS .opp-table{
+    border: solid 1px lightgrey;
+}
+
+.THIS .opp-table th{
+    text-align: left;
+    border-right: solid 1px lightgrey;
+	padding: 1% 0% 1% 0.5% !important;
+    background: #585858;
+    color: #fff;
+}
+
+.THIS .opp-table td{
+    text-align: left;
+    border-right: solid 1px lightgrey;
+    padding: 0.5% 0% 0.5% .5% !important;
+}
+
+.THIS.cDelphi_Main{
+    background: #fff !important;
+}
+
+.THIS .step-header{
+    font-size: 15px;
+    background: #585858!important;
+    color: #fff;
+}
+
+.THIS .page-size-dropdown{
+    width: 10%;
+    display: inline-block;
+}
+
+.THIS .page-size-dropdown label{
+    display: none;
+}
+
+.THIS .go-to-page-box{
+    width: 17%;
+    display: inline-block;
+}
+
+.THIS .go-to-page-box label{
+    display: none;
+}
+
+.THIS.back-drop{
+    background: #000!important;
+    opacity: .7;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    margin-top: -1%;
+    margin-left: -1%;
+}
+
+.THIS .spinner-text{
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 20%;
+}

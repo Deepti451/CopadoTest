@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This email is sent after 3 days of trial.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>RRD - First Follow-up</name>
+    <style>none</style>
+    <subject>Thanks for downloading Round Robin Distributor - Help is just a phone call away</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

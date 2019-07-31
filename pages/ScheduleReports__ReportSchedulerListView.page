@@ -1,0 +1,284 @@
+<!--* Created By      : Ankur Saini - Mirketa Inc.
+ * Created Date    : 6/22/2017
+ * Created Purpose : Custom List View Page of Report Scheduler.
+ * Page Name       : ReportSchedulerListView-->
+<apex:page standardController="ScheduleReports__Report_Scheduler_Setup__c" extensions="ScheduleReports.ReportSchedulerListView" sidebar="false" docType="html-5.0" applyBodyTag="false" tabStyle="Report_Scheduler_List__tab">
+<html lang="en">
+<head>
+<apex:stylesheet value="{!URLFOR($Resource.ScheduleReports__bootstrap_min)}"/>
+<style type="text/css">
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}   
+.popup
+    {
+        background-color: white;        
+        z-index: 9999;
+        left: 50%;
+        padding:10px;
+        position: absolute;
+        width:Auto;       
+        top:80px;
+    }
+
+.popupBg
+    {
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 70);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+    }
+    
+.closeButton {
+        float: right;
+   }
+   
+
+.bPageBlock {
+    background-color: #f0ffff;    
+    width: 100%;
+}
+/*****************steps css start here************/
+.custom-col-green{
+    background: rgba(162, 255, 151, 0.44) none repeat scroll 0 0;
+    border-radius: 5px;
+    color: #563232;
+    display: block;
+    margin-bottom: 0.8%;
+    padding: 3% 5px 3%;
+   
+}
+
+.custom-col-green p {
+    color:#563232;
+    font-size: 16px;
+    font-weight: 400;
+} 
+
+.pagerNew li {
+    margin-right: 1em;
+    list-style: none;
+} 
+.pagerNewPrev li{
+    margin-left: 1em;
+    list-style: none;
+}
+.pagerNew li > a, .pagerNew li > span{
+    background-color: #119548;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 14px;
+    color: #fff;
+    font-size: 18px;
+}
+.pagerNew li > a:hover, .pagerNewPrev li a:hover{
+    text-decoration: none;
+    background-color: #119548;
+}
+.pagerNewPrev li > a, .pagerNewPrev li > span{
+    background-color: #a0a0a0;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 14px;
+    color: #fff;
+    font-size: 28px;
+    line-height: 40px;
+}
+
+.record-data table{
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;    
+}
+
+.record-data th{
+    background: #17c07a;
+    padding: 10px;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;        
+}
+
+.record-data td{
+    padding: 10px;
+    color: #333;
+    font-size: 14px;  
+}
+
+.record-data tbody tr:nth-child(odd){
+    background: rgba(61, 139, 89, 0.25);
+}
+
+.record-data tbody tr:nth-child(even){
+    background: rgba(61, 139, 89, 0.06);
+}
+ 
+.error{
+        color: red;
+    padding-left: 43%;
+    padding-top: 7%;
+    display: block;
+    font-weight: 600;
+     font-size: 18px;
+    }
+    
+</style>
+</head>
+<body>
+<apex:messages id="myMsg"/>
+    <apex:form id="frm">
+        
+        <apex:actionFunction name="renTable" reRender="pbtable,disablebtn,theValues,thePanel,thePanel2" action="{!serachScheduler}" />
+        <apex:outputPanel id="thePanel">
+            <apex:pageMessages ></apex:pageMessages>
+        </apex:outputPanel>
+        <apex:outputPanel id="theValues">
+        <div class="row custom-col-green">
+        <div style="margin-top: -23px;font-size: 18px;">
+           Search by Report Name &nbsp;<apex:inputText value="{!searchText}" id="inptext" onkeypress="return enterPressHandler();" onchange="renTable();" maxlength="255" >
+                                        </apex:inputText>&nbsp;&nbsp;&nbsp;
+           
+            Show Records &nbsp;<apex:selectList value="{!customListViewSize}" size="1" onchange="getrep();" style="height: 28px;width: 60px; re">
+      
+            
+            <apex:actionFunction name="getrep" action="{!getReportsList}" reRender="comButton,pbtable,disablebtn,theValues"/>
+                <apex:selectOptions value="{!ViewSize}"/>
+            </apex:selectList>
+            <apex:commandButton onclick="confirmDelete()" value="Delete Selected" id="disablebtn" disabled="{!disableDeleteSelected}" reRender="frm" style="{!if(disableDeleteSelected!=true,'background: #17c07a;color: white;border-color: #119548;font-size: initial;float: right;margin-right: 22px;','background: darkgrey;color: white;border-color: #119548;font-size: initial;float: right;margin-right: 22px;')}"/>
+       
+        </div>
+            <!--     <apex:pageMessages id="showmsg"></apex:pageMessages>  -->
+            
+            <apex:outputPanel id="pbtable">
+               
+                	<apex:outputText rendered="{!showExceptionMessage}"><div style="color:red">
+                  
+                     
+                        </div></apex:outputText>
+                    <div style="border-radius:5px;border: solid 2px #17c07a;float: left;width: 100%;margin-top: 14px;">
+                             <table border="0" class="record-data table-striped" width="100%" id="table">
+                                     <thead>
+                                        <tr>
+                                            <th>
+                                                <apex:inputCheckbox value="{!allBool}" id="allboolean" disabled="{!recordNotFound}">
+                                                    <apex:actionSupport reRender="pbtable,disablebtn,inptext" action="{!selectAll}" event="onchange"/>
+                                                </apex:inputCheckbox>
+                                                Actions</th>
+                                            <th>Scheduler Number</th>
+                                            <th>Report Name</th>
+                                            <th>Attachment Extension</th>
+                                            <th>Report Type</th>
+                                            <th>Send Now</th>
+                                            <th>Enabled</th>
+                                            
+                                        </tr>
+                                         
+                                     </thead>
+                                 
+                                     <tbody>
+                                         
+                                     <apex:repeat var="rslst" value="{!listWrappRS}" id="rep">
+                                         <tr>
+                                             <td>
+                                                 <apex:inputCheckbox value="{!rslst.selected}">
+                                                 <apex:actionSupport reRender="disablebtn,allboolean,inptext" action="{!selectOnebyOne}" event="onchange"/>
+                                                 </apex:inputCheckbox>&nbsp;&nbsp;
+                                                 <apex:outputLink value="/apex/ReportScheduler?id={!rslst.rsWrap.id}&PreviousPageName=ReportSchedulerListView" target="_parent">Edit</apex:outputLink>
+                                                 &nbsp;|&nbsp;
+                                                 <apex:commandLink onclick="if(confirm('Are you sure ?'))deleteReportScheduler('{!rslst.rsWrap.id}');" value="Del" reRender="table"></apex:commandLink>
+                                                 &nbsp;|&nbsp;
+                                                 <apex:commandLink onclick="if(confirm('Are you sure ?'))myEnable('{!rslst.rsWrap.id}');" value="Enable" reRender="table" rendered="{!rslst.rsWrap.ScheduleReports__Enabled__c==false}"></apex:commandLink>
+                                                 <apex:commandLink onclick="if(confirm('Are you sure ?'))myDisable('{!rslst.rsWrap.id}');" value="Disable" reRender="table" rendered="{!rslst.rsWrap.ScheduleReports__Enabled__c==true}"></apex:commandLink>
+                                             </td>
+                                             <td style="padding-left: 50px;">
+                                                <apex:outputLink value="/{!rslst.rsWrap.id}" target="_parent" title="{!rslst.rsWrap.name}">{!rslst.rsWrap.name}</apex:outputLink> 
+                                             </td>
+                                             <td>
+                                                 {!rslst.rsWrap.Report_Name_FF__c}
+                                             </td>
+                                             <td style="padding-left: 83px;" >
+                                                {!rslst.rsWrap.Attachment_Extension__c}
+                                                   
+                                             </td>
+                                             <td>
+                                                {!rslst.rsWrap.Report_Type__c} 
+                                             </td>
+                                             <td style="padding-left: 40px;">
+                                                <apex:inputCheckbox value="{!rslst.rsWrap.ScheduleReports__Send_Now__c}" disabled="true"/> 
+                                             </td>
+                                             <td style="padding-left: 35px;">
+                                                 
+                                                 <apex:inputCheckbox value="{!rslst.rsWrap.ScheduleReports__Enabled__c}" disabled="true"/>                                             
+                                             </td>
+                                              
+                                         </tr>
+                                     </apex:repeat>
+                                         
+                                    </tbody> 
+                              </table>
+                  </div>
+                    <apex:outputText value="No matching records found!!!" styleClass="error" rendered="{!showErr}"></apex:outputText>
+                
+                  <div style="width: 100%;display: inline-block;margin-top: 10px;margin-left: 460px;">                                  
+                      <apex:dynamicComponent componentValue="{!myCommandButtons}" rendered="{!showButtons}" id="comButton"/>                     
+                  </div>
+                 
+                
+              </apex:outputPanel>
+            <apex:outputPanel id="thePanel2">
+            <apex:pageMessages ></apex:pageMessages>
+        </apex:outputPanel>
+              <apex:actionFunction action="{!refreshGrid}" name="queryByPage" reRender="pbtable,myButtons,thePanel,thePanel2" >
+                  <apex:param name="firstParam" assignTo="{!selectedPage}" value="" />
+              </apex:actionFunction>
+              <apex:actionFunction name="mySingleDelete" action="{!processSelected}"/>
+              <apex:actionFunction action="{!myDelete}" name="deleteReportScheduler" reRender="table">
+                   <apex:param name="acco" value="" assignTo="{!id}"/>
+              </apex:actionFunction>
+              <apex:actionFunction name="myEnable" action="{!enableSchedulerListView}" reRender="table,thePanel">
+                   <apex:param name="rsidToEnable" value="" assignTo="{!rsidToEnable}"/>
+              </apex:actionFunction>
+              <apex:actionFunction name="myDisable" action="{!disableSchedulerListView}" reRender="table">
+                   <apex:param name="rsidToDisable" value="" assignTo="{!rsidToDisable}"/>
+              </apex:actionFunction>
+        </div>
+      </apex:outputPanel>
+        <apex:outputText >
+        </apex:outputText>
+    </apex:form>
+    <script>
+        function confirmDelete(){
+         if(confirm('Are you sure ?'))
+               mySingleDelete();
+        } 
+       function enterPressHandler(){
+           var evt=window.event;    
+        	if(evt.keyCode==13){
+            	renTable();
+                return false;    
+            }else{
+            	return true;    
+            }
+        }
+        function renTable1(e){ 
+           var searchText = document.getElementById('{!$Component.frm:inptext}').value;    
+              e.preventDefault();
+            if(e.keyCode==13 && searchText == null){           
+                    e.preventDefault();                        
+            }  
+            else{
+            
+            }
+                 
+        }
+    </script>
+   </body>
+  </html>
+</apex:page>

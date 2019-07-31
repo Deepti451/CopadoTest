@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCategoryGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <dataCategory>
+        <dataCategory>
+            <label>Android</label>
+            <name>Android</name>
+        </dataCategory>
+        <dataCategory>
+            <label>iOS</label>
+            <name>iOS</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Windows</label>
+            <name>Windows</name>
+        </dataCategory>
+        <dataCategory>
+            <label>HTML5</label>
+            <name>HTML5</name>
+        </dataCategory>
+        <label>All</label>
+        <name>All</name>
+    </dataCategory>
+    <description>This will be used to categorize articles for Mobile work.</description>
+    <label>Mobile</label>
+    <objectUsage/>
+</DataCategoryGroup>

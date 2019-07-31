@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>For Healthcare Auto response</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Mirketa.com Healthcare Auto Response Templete</name>
+    <style>none</style>
+    <subject>Mirketa team would  help you make Salesforce Awesome!</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

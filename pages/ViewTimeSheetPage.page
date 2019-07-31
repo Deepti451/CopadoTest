@@ -1,0 +1,348 @@
+<apex:page controller="ViewTimeSheetCls" showHeader="false" sidebar="false" standardStylesheets="true" cache="false">
+    <apex:form id="theform">
+    <apex:pageMessages id="themsg"/>
+    <html>
+
+    <head>
+    
+     
+        <apex:includescript value="//code.jquery.com/jquery-1.11.1.min.js" / >        
+        <apex:includescript value="https://code.jquery.com/jquery-1.11.1.min.js" / >
+        <apex:includescript value="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" />
+        <apex:stylesheet value="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.css" />
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-image: url("{!$Resource.timsheetBackimage}") !important;
+                background-repeat: repeat-x  repeat-y ;
+               <!--- overflow: hidden;--->
+                }
+        
+            .Container {
+                min-height: 100%;
+                width:100%;
+                background-image: url("{!$Resource.timsheetBackimage}") !important;
+                background-repeat: repeat-x  repeat-y ;
+                margin: auto;
+                position:relative;
+                padding-bottom: 61px; 
+            }
+            
+            .header {
+                width: 100%;
+                background: #1797C0;
+                height: 50px;
+            }
+            
+            .content {
+               width: 80%;
+               margin:auto;
+               border: 6px solid  #1797C0;
+               margin-top: 10px;
+               border-radius: 33px;
+               
+            }
+            
+            h3 {
+               color: #0099FF;
+                font-family: Arial;
+                font-size: 18px;
+           }
+            
+           p {
+                font-size: 13px;
+                padding-left:250px;
+                color:white;
+            }
+           
+                      
+            .t1{ margin-top: 30px;
+              margin-left: 50px;}
+            
+            td {
+                padding: 10px 10px;
+                font-size: 15px;
+            }
+           .usrnme .tl td,.usrnme .tl td a{
+                color:white;
+                font-size: 15px;
+                font-weight:bold;
+            }
+            
+            input,
+            textarea {
+                -moz-border-radius: 10px;
+                border-radius: 5px;
+                padding: 5px;
+            }
+            
+            .footer {
+                width: 100%;
+                height: 50px;
+          }
+            
+            .tble{width:96%;
+                 margin:15px 20px;
+                 }
+             .tble th{border-bottom: 2px solid #B0C4DE;
+                     border-top: 2px solid #B0C4DE;
+                     border-collapse: collapse;}
+         
+             .footer1 {
+                     position:fixed;
+                     bottom:0;
+                     left:0;
+                     background-color:#1797C0;
+                     border-color:#269abc;
+                     height:50px;
+                     width:100%;
+           }
+           .usrnme{width:20%;float:right;}
+           
+             
+       
+            
+          .table{
+                   width:85%;
+                   margin:auto;
+                   margin-bottom:20px;
+           }
+          
+           
+          .footer1 p{padding-left:300px;
+                      padding-top:10px;
+                      color:white;
+                      font-size:11px;
+                      font-weight:bold;}
+            .starttable{
+                border : 0px;
+            } 
+            .startdt{
+                font-size: 15px;
+            } 
+            .chkBtn{
+                  margin-right: 5px;  
+                  background-color: #0B8AEC;
+                  border: none;
+                  padding: 5px 9px;
+                  color: #fff;
+                  border-radius: 5px;
+            }  
+            .dateFormat{
+                display:none;
+            }
+             
+            .content .myButt {
+                background-color: white;
+                -moz-border-radius: 28px;
+                -webkit-border-radius: 28px;
+                border-radius: 24px;
+                border: 1px solid #1797C0;
+                display: inline-block;
+                cursor: pointer;
+                color: #0099FF;
+                font-family: Arial;
+                font-size: 17px;
+                padding: 7px 31px;
+                margin-left: 422px;
+                margin-bottom: 5px;
+                text-decoration: none;
+                margin-top: -15px;
+                
+                }
+              
+                
+            .popupBackground {
+                background-color:black;
+                opacity: 0.20;
+                filter: alpha(opacity = 20);
+                
+                #t2 border-left-color:Red;
+            
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 998;
+                position: absolute;
+                cursor:wait;
+            }
+            
+            .PopupPanel {
+                
+                left: 50%;
+                width: 200px;
+                margin-left: -100px;
+                top: 50%;
+                height: 200px;
+                margin-top: -25px;
+                z-index: 999;
+                position: fixed;
+                cursor:pointer;
+        </style>
+   
+
+   
+        
+       
+        
+        
+        <!--
+        <script>
+            function confirmDelete() {
+              return confirm('Are you sure you want to delete?');
+            }    
+        </script>
+        -->
+        <script>
+            j$ = jQuery.noConflict();
+            j$(document).ready( function () {
+                var tablecls = j$('[id$="tablecls"]').DataTable({
+                    "order": [],
+                    "columnDefs": [ {
+                      "targets"  : 'no-sort',
+                      "orderable": false,
+                      type: 'date-MM/DD/yyyy',                       
+                    }]
+                });
+                
+            });
+        </script>
+   </head>
+
+    <body>
+    
+    
+    <apex:actionStatus id="sts" style="align:center;">       
+       <apex:facet name="start">
+            <div>
+                <div class="popupBackground" />
+                <div class="PopupPanel">
+                    <table border="0" width="100%" height="100%">                            
+                        <tr>
+                            <td align="center"><img src="{!$Resource.LoadigImage}"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+    
+        <div class="Container">
+            <div class="header">
+            <apex:image id="theImage" value="{!$Resource.mirketalogo}" width="120" height="50"/>
+               <div class="usrnme">
+               <table class="tl">
+                  <tr><td>{!username}</td>
+                  <td> 
+                      <apex:commandLink value="Logout" reRender="theform" action="{!logoutpage}" immediate="true" style="text-decoration:none"/>
+                      <!--<a href="http://teestfb2-developer-edition.ap2.force.com/testfb2">Logout</a>-->
+                  </td>
+                   <td>
+                     <apex:commandLink reRender="theform" action="{!timesheetmenu}">
+                       <apex:image id="theImage01" value="{!$Resource.HomeImage}"  width="50" height="40" />
+                     </apex:commandLink>
+                   </td> 
+                     
+                  </tr>
+               </table>
+              
+              
+               </div>
+          </div>
+
+            <div class="content">
+                  <div class="table">
+         <apex:actionFunction name="apply" action="{!alldata}" reRender="themsg,therepeat,theform" status="sts"/>
+        <!--<apex:actionFunction action="{!deletetimesheet}" name="deletetimesheet" reRender="theform" >
+            <apex:param name="timesheetid" value="" assignTo="{!selecttimesheetId}"/>
+        </apex:actionFunction>-->
+                  <table>
+                    <tr>
+                        <td class="starttable">
+                            <span class="startdt">Start Date :</span> 
+                        </td>
+                        <td class="starttable">
+                            <apex:inputfield value="{!startdatePicker.closedate}"/>
+                        </td>
+                        <td class="starttable">            
+                            <span style="margin-left:50px;" class="startdt">End Date :</span> 
+                        </td>
+                        <td class="starttable">
+                            <apex:inputfield value="{!enddatePicker.closedate}" style="margin-right: 6px;"/>
+                        </td>
+                        <td class="starttable">
+                            <input type="button" value="Apply"  Class="chkBtn" onclick="apply()"/>
+                        </td>                                                
+                    </tr>
+                </table>
+              
+                  <table id="tablecls" class="display">
+                       <thead>
+                            <tr>
+                               <th>
+                                    Ticket Number
+                                </th>
+                                <th>
+                                    Epic
+                                </th>
+                                <th>
+                                    Time Spend
+                                </th>
+                                <th>
+                                    Project
+                                </th>
+                                <th>
+                                    Date
+                                </th>
+                                                                                        
+                            </tr>
+                        </thead>
+                        <tbody>                                        
+                            <apex:repeat value="{!TimeSheetList}" var="record" id="therepeat">
+                                <tr>
+                                   <td>
+                                        <apex:outputField value="{!record.Ticket_Number__c}"/>
+                                        
+                                    </td>
+                                    <td>
+                                        <apex:outputField value="{!record.Epic__c}"/>
+                                                                     
+                                    </td>
+                                    <td>
+                                        <apex:outputField value="{!record.Time_Spend__c}"/>
+                                        
+                                    </td>                            
+                                    <td>
+                                        <apex:outputField value="{!record.Project__r.name}"/>
+                                    </td>
+                                    <td>
+                                        <apex:outputField value="{!record.Date__c}"/>
+                                    </td>                                                                                                                                                     
+                                </tr>
+                             </apex:repeat>
+                        </tbody>
+                    </table>
+                 </div>  
+                  <!--<apex:commandButton value="Submit" action="{!submittimesheet}" reRender="themsg,theform" styleClass="myButt"/>-->
+                  
+                      <apex:commandButton value="Create New Record" action="{!createnewrecord}" reRender="theform" styleClass="myButt"/>
+                     
+                  
+             </div>
+            
+              <div class="footer1 ">
+         <p>Copyright © 2000-2015 salesforce.com, inc. All rights reserved. | Privacy Statement | Security Statement | Terms of Use | 508 Compliance</p>
+         </div>
+        </div>
+       
+    </body>
+
+    </html>
+    
+  
+    
+    </apex:form>
+    
+</apex:page>

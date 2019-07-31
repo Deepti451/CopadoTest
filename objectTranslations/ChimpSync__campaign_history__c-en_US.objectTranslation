@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Active --></label>
+        <name>ChimpSync__Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Campaign --></label>
+        <name>ChimpSync__Campaign__c</name>
+        <relationshipLabel><!-- Campaign History --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Click rate --></label>
+        <name>ChimpSync__Click_rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Emails Sent --></label>
+        <name>ChimpSync__Emails_sent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Facebook Likes --></label>
+        <name>ChimpSync__Facebook_likes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Forward Opens --></label>
+        <name>ChimpSync__Forward_opens__c</name>
+    </fields>
+    <fields>
+        <label><!-- Forwarded --></label>
+        <name>ChimpSync__Forwarded__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hard Bounces --></label>
+        <name>ChimpSync__Hard_bounces__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last ChimpSync --></label>
+        <name>ChimpSync__Last_sync__c</name>
+    </fields>
+    <fields>
+        <label><!-- MailChimp Campaign E-mail --></label>
+        <name>ChimpSync__MailChimp_Campaign_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- MailChimp Campaign URL --></label>
+        <name>ChimpSync__MailChimp_Campaign_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- MailChimp List --></label>
+        <name>ChimpSync__MailChimp_List__c</name>
+    </fields>
+    <fields>
+        <label><!-- MailChimp Report --></label>
+        <name>ChimpSync__Mailchimp_report__c</name>
+    </fields>
+    <fields>
+        <label><!-- Open rate --></label>
+        <name>ChimpSync__Open_rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- People Who Clicked --></label>
+        <name>ChimpSync__People_who_clicked__c</name>
+    </fields>
+    <fields>
+        <label><!-- Segmentation --></label>
+        <name>ChimpSync__Segmentation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Soft Bounces --></label>
+        <name>ChimpSync__Soft_bounces__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync Member Activity --></label>
+        <name>ChimpSync__Sync_Member_Activity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Clicks --></label>
+        <name>ChimpSync__Total_clicks__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Times Opened --></label>
+        <name>ChimpSync__Total_times_opened__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique clicks --></label>
+        <name>ChimpSync__Unique_clicks__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique opens --></label>
+        <name>ChimpSync__Unique_opens__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unsubscribes --></label>
+        <name>ChimpSync__Unsubscribes__c</name>
+    </fields>
+    <fields>
+        <label><!-- MailChimp Campaign ID --></label>
+        <name>ChimpSync__mailchimp_campaign_id__c</name>
+    </fields>
+</CustomObjectTranslation>

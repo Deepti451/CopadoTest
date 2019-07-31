@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to Pranshu for Advitya download</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Email Pranshu Advitya</name>
+    <style>none</style>
+    <subject>New {!Lead.LeadSource} Lead in Salesforce : {!Lead.Name}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

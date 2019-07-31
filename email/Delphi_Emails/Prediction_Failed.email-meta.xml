@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This email will be used when the model prediction gets failed.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Prediction Failed</name>
+    <style>none</style>
+    <subject>Model Prediction Failed</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

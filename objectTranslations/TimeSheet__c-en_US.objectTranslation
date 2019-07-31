@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>TimeSheet</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>TimeSheets</value>
+    </caseValues>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Epic --></label>
+        <name>Epic__c</name>
+    </fields>
+    <fields>
+        <label><!-- Organisation --></label>
+        <name>Organisation__c</name>
+        <picklistValues>
+            <masterLabel>Developer</masterLabel>
+            <translation><!-- Developer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Production</masterLabel>
+            <translation><!-- Production --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sandbox</masterLabel>
+            <translation><!-- Sandbox --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- TimeSheets --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Complete</masterLabel>
+            <translation><!-- Complete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Submit Record --></label>
+        <name>Submit_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Task --></label>
+        <name>Task__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ticket Number --></label>
+        <name>Ticket_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time Spend --></label>
+        <name>Time_Spend__c</name>
+    </fields>
+    <fields>
+        <label><!-- Manager --></label>
+        <name>Useer__c</name>
+        <relationshipLabel><!-- TimeSheets --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Enter Valid date. --></errorMessage>
+        <name>Enter_Valid_date</name>
+    </validationRules>
+</CustomObjectTranslation>

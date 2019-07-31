@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This Template will be used to send email to those RRD leads who installed older version of RRD.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Old RRD Leads Templete</name>
+    <style>none</style>
+    <subject>Salesforce Round Robin Distributor- Best RRD App on AppExchange</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

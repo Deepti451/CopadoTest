@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Approved Status --></label>
+        <name>mirketappm__Approved_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Budget Time --></label>
+        <name>mirketappm__Budget_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Value --></label>
+        <name>mirketappm__Budget_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>mirketappm__End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Active --></label>
+        <name>mirketappm__Is_Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Jira Project Key --></label>
+        <name>mirketappm__Jira_Project_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Jira Project Name --></label>
+        <name>mirketappm__Jira_Project_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Jira Worklog Created Date --></label>
+        <name>mirketappm__Jira_Worklog_Created_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Jira Worklog Id --></label>
+        <name>mirketappm__Jira_Worklog_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Jira Worklog Updated Date --></label>
+        <name>mirketappm__Jira_Worklog_Updated_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>mirketappm__Opportunity__c</name>
+        <relationshipLabel><!-- Projects --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Project Type --></label>
+        <name>mirketappm__Project_Type__c</name>
+        <picklistValues>
+            <masterLabel>in-house</masterLabel>
+            <translation><!-- in-house --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Stage --></label>
+        <name>mirketappm__Stage__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>mirketappm__Start_Date__c</name>
+    </fields>
+</CustomObjectTranslation>

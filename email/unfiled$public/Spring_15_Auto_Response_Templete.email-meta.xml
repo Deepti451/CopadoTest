@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Spring 15 Auto Response Templete</name>
+    <style>none</style>
+    <subject>Thank You for Downloading Salesforce Spring 15 Highlights - Now let’s make your Salesforce Awesome!</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

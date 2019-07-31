@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Portal Enhancements</fullName>
+        <default>false</default>
+        <label>Portal Enhancements</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Partner Enhancements</fullName>
+        <default>false</default>
+        <label>Partner Enhancements</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Product Enhancements</fullName>
+        <default>true</default>
+        <label>Product Enhancements</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </standardValue>
+</StandardValueSet>

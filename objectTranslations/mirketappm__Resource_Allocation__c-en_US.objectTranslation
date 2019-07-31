@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Approval Status --></label>
+        <name>mirketappm__Approved_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Cost --></label>
+        <name>mirketappm__Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- From Date --></label>
+        <name>mirketappm__From_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Hours --></label>
+        <name>mirketappm__Number_of_Hours__c</name>
+    </fields>
+    <fields>
+        <label><!-- Percentage --></label>
+        <name>mirketappm__Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project Name --></label>
+        <name>mirketappm__Project_Name__c</name>
+        <relationshipLabel><!-- Resources Allocation --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Resource Name --></label>
+        <name>mirketappm__Resource_Name__c</name>
+        <relationshipLabel><!-- Resources Allocation --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Role In Project --></label>
+        <name>mirketappm__Role_In_Project__c</name>
+        <picklistValues>
+            <masterLabel>Developer</masterLabel>
+            <translation><!-- Developer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lead</masterLabel>
+            <translation><!-- Lead --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Project Manager</masterLabel>
+            <translation><!-- Project Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>QA Engineer</masterLabel>
+            <translation><!-- QA Engineer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Senior Developer</masterLabel>
+            <translation><!-- Senior Developer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Senior QA Engineer</masterLabel>
+            <translation><!-- Senior QA Engineer --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- To Date --></label>
+        <name>mirketappm__To_Date__c</name>
+    </fields>
+</CustomObjectTranslation>

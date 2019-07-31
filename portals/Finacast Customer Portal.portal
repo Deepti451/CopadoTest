@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Portal xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <admin>dost007@70demo.com</admin>
+    <description>Finacast Customer Portal</description>
+    <emailSenderAddress>rmaheshwari@salesforce.com</emailSenderAddress>
+    <emailSenderName>rmaheshwari@partnerdemoorg.com</emailSenderName>
+    <enableSelfCloseCase>false</enableSelfCloseCase>
+    <forgotPassTemplate>unfiled$public/ChangePwdEmail</forgotPassTemplate>
+    <isSelfRegistrationActivated>false</isSelfRegistrationActivated>
+    <logoutUrl>www.finacast.com</logoutUrl>
+    <newPassTemplate>unfiled$public/ChangePwdEmail</newPassTemplate>
+    <newUserTemplate>unfiled$public/NewUserEmail</newUserTemplate>
+    <selfRegUserTemplate>unfiled$public/SelfRegUserEmail</selfRegUserTemplate>
+    <showActionConfirmation>false</showActionConfirmation>
+    <type>CustomerSuccess</type>
+</Portal>

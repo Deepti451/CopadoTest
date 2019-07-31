@@ -1,0 +1,1329 @@
+<!--
+ * Created By      : Ankur Saini - Mirketa Inc.
+ * Created Date    : 3/27/2017
+ * Created Purpose : This page is used to Schedule the Report as per user requirement.
+ * Page Name       : ReportScheduler    -->
+ 
+<apex:page standardController="ScheduleReports__Report_Scheduler_Setup__c" extensions="ScheduleReports.ReportScheduler" tabStyle="Schedule_Report__tab" docType="html-5.0" sidebar="false" applyBodyTag="false">
+<apex:includeLightning />
+<script>
+window.onload = start;
+var selRep='';
+var testStr="";
+var clean=false;
+var checked=[];
+var selected=false;
+function start() {        
+    disableScheduler();
+             
+    $("#recdiv").css("display","block");
+}
+ 
+function RecpntTypeShowHide(elem){
+
+     if(elem.value=='Contacts'){
+         document.getElementById('maindiv').style.display = "block";
+         document.getElementById('contacts').style.display = "block";
+         document.getElementById('users').style.display = "none";
+         document.getElementById('{!$Component.frm:nameLabel}').style.display="none";
+         document.getElementById('{!$Component.frm:nameValue}').style.display="none";
+         document.getElementById('{!$Component.frm:emailLabel}').style.display="none";
+         document.getElementById('{!$Component.frm:emailValue}').style.display="none";
+         document.getElementById('{!$Component.frm:showButton}').style.display="block";      
+         document.getElementById('recdiv').style.display = "block"; 
+
+     }
+     
+     if(elem.value =='Users'){
+         document.getElementById('maindiv').style.display = "block";
+         document.getElementById('users').style.display = "block";
+         document.getElementById('contacts').style.display = "none";
+         document.getElementById('{!$Component.frm:nameLabel}').style.display="none";
+         document.getElementById('{!$Component.frm:nameValue}').style.display="none";
+         document.getElementById('{!$Component.frm:emailLabel}').style.display="none";
+         document.getElementById('{!$Component.frm:emailValue}').style.display="none";
+         document.getElementById('{!$Component.frm:showButton}').style.display="block";       
+         document.getElementById('recdiv').style.display = "block";
+         
+     }
+     if(elem.value =='External Email Address'){
+         document.getElementById('maindiv').style.display = "block";
+         document.getElementById('users').style.display = "none";
+         document.getElementById('contacts').style.display = "none";
+         document.getElementById('{!$Component.frm:nameLabel}').style.display="block";
+         document.getElementById('{!$Component.frm:nameValue}').style.display="block";
+         document.getElementById('{!$Component.frm:emailLabel}').style.display="block";
+         document.getElementById('{!$Component.frm:emailValue}').style.display="block";
+         document.getElementById('{!$Component.frm:showButton}').style.display="block"; 
+         document.getElementById('recdiv').style.display = "block";      
+         
+     }
+     if(elem.value =='--None--') {
+         document.getElementById('maindiv').style.display = "none";
+         document.getElementById('users').style.display = "none";
+         document.getElementById('contacts').style.display = "none";
+         document.getElementById('{!$Component.frm:nameLabel}').style.display="none";
+         document.getElementById('{!$Component.frm:nameValue}').style.display="none";
+         document.getElementById('{!$Component.frm:emailLabel}').style.display="none";
+         document.getElementById('{!$Component.frm:emailValue}').style.display="none";
+         document.getElementById('{!$Component.frm:showButton}').style.display="none";         
+         document.getElementById('recdiv').style.display = "block";        
+         
+     }
+         
+     var u = document.getElementById('{!$Component.frm:user}').value;
+     var c = document.getElementById('{!$Component.frm:con}').value;
+     var name = document.getElementById('{!$Component.frm:nameValue}').value;
+     var email = document.getElementById('{!$Component.frm:emailValue}').value;
+     if(u!=""){
+         document.getElementById('{!$Component.frm:user}').value = '';
+         u="";
+         c="";
+         name="";
+     }
+     if(c!=""){
+         document.getElementById('{!$Component.frm:con}').value = '';
+         u="";
+         c="";
+         name="";
+     }
+     if(name!=""){
+         document.getElementById('{!$Component.frm:nameValue}').value = '';
+         document.getElementById('{!$Component.frm:emailValue}').value = '';
+         u="";
+         c="";
+         name="";
+     } 
+        
+ } 
+    
+    function disableScheduler(){
+       
+        var c=$("[id*='checkSend']").is(":checked");
+        if(c){
+            document.getElementById('{!$Component.frm:schedName}').value='';
+            document.getElementById('{!$Component.frm:schedName}').disabled=true;  
+            
+            //$("[id='schedName']").prop('disabled',true);
+        }
+        else if(!c){
+            
+            document.getElementById('{!$Component.frm:schedName}').disabled=false;  
+            
+            //$("[id='schedName']").prop('disabled',false);
+        }
+        
+    }
+ 
+ function checkLength(desc){
+     var c = $(desc).val().length;
+     if(c>=13000){
+         document.getElementById('errorPanelex').style.display="table";
+         $("[id='description']").prop("disabled",true); 
+         setTimeout(function() {
+            $("[id='description']").prop("disabled",false);
+            document.getElementById('errorPanelex').style.display="none";
+         }, 2500);
+     }
+     
+ }
+ 
+ function checkForSymbols(){
+     
+     
+         goToStep4();
+     
+     
+ }
+ 
+ function escChar(t){
+     
+      t=t.replace(/</g,"&lt").replace(/>/g,"&gt").replace("&","&amp").replace('"',"&quot").replace("/","&#x2F").replace(/'/g,"&#x27").replace(/<script>/g,"").replace(/%/g,"");
+      return t;           
+     //return temp;
+ }
+         
+ function add(){
+ 
+     var rec = document.getElementById('{!$Component.frm:rectype}').value;
+     var u = document.getElementById('{!$Component.frm:user}').value;
+     var c = document.getElementById('{!$Component.frm:con}').value;
+     var name = document.getElementById('{!$Component.frm:nameValue}').value;
+     var email = document.getElementById('{!$Component.frm:emailValue}').value;
+    
+     if(c=="" && rec=='Contacts'){
+     
+         //alert('Add Contact');
+        document.getElementById('msgForConfirmation').innerHTML='Add Contact'; 
+        document.getElementById('popup').style.display= 'block';
+          document.getElementById('j_id0:frm:rectype').value = "--none--";
+         
+     }
+     if(u=="" && rec=='Users'){
+         //alert('Add User');
+         document.getElementById('msgForConfirmation').innerHTML='Add User'; 
+         document.getElementById('popup').style.display= 'block';
+         document.getElementById('j_id0:frm:rectype').value = "--none--";
+     }
+     if(name=="" && rec=='External Email Address' && email==""){
+         //alert('Enter Recipient Name and Email Address');
+         document.getElementById('msgForConfirmation').innerHTML='Enter Recipient Name and Email Address'; 
+         document.getElementById('popup').style.display= 'block';
+         document.getElementById('j_id0:frm:rectype').value = "--none--";
+     }
+     if(email=="" && rec=='External Email Address' && name!=""){
+        // alert('Enter Recipient Email Address');
+         document.getElementById('msgForConfirmation').innerHTML='Enter Recipient Name'; 
+         document.getElementById('popup').style.display= 'block';
+         document.getElementById('j_id0:frm:rectype').value = "--none--";
+     }
+     if(email!="" && rec=='External Email Address' && name==""){
+         //alert('Enter Recipient Name');
+         document.getElementById('msgForConfirmation').innerHTML='Enter Recipient Name'; 
+         document.getElementById('popup').style.display= 'block';
+         document.getElementById('j_id0:frm:rectype').value = "--none--";
+     }
+     if(u!=""){
+         getValue(escChar(u));
+         document.getElementById('{!$Component.frm:user}').value = '';
+         u="";
+         c="";
+         name="";
+     }
+     if(c!=""){
+         getValue(escChar(c));
+         document.getElementById('{!$Component.frm:con}').value = '';
+         u="";
+         c="";
+         name="";
+     }
+     if((email!="" && name!="") || (email!="" && name=="")){
+         var atpos=email.indexOf("@");
+         var dotpos=email.lastIndexOf(".");
+
+      if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length){
+           alert("Invalid Email Address");
+           return false;
+        }
+     }   
+     if(name!="" && email!=""){
+         getValue(escChar(name));
+         document.getElementById('{!$Component.frm:nameValue}').value = '';
+         document.getElementById('{!$Component.frm:emailValue}').value = '';
+         u="";
+         c="";
+         name="";
+     }    
+       
+ }
+ 
+ function clearExternalFields(){
+     document.getElementById('{!$Component.frm:nameValue}').value = '';
+     document.getElementById('{!$Component.frm:emailValue}').value = '';
+     goToStep5();
+ }
+ 
+ function showTable(elem){
+     checked=[];
+     if(elem.value=='Standard Report' || elem.value=='Visualforce Report' || elem=='Standard Report' || elem=='Visualforce Report'){
+         document.getElementById('divfortab').style.display = "block";
+         document.getElementById('searchTab').style.display = "block";
+     }
+     
+     if(elem.value==''){
+         document.getElementById('divfortab').style.display = "none";
+         document.getElementById('searchTab').style.display = "none";
+     }
+     var reportType=$("[id*='report-type']").val();
+     showtab(reportType);
+ 
+ }
+    
+    function enterPressHandler(){
+           var evt=window.event;    
+            if(evt.keyCode==13){
+                renTable();
+                return false;    
+            }else{
+                return true;    
+            }
+        }
+</script>
+<html lang="en">
+<head>
+
+<apex:stylesheet value="{!URLFOR($Resource.ScheduleReports__bootstrap_min)}"/>
+
+<apex:stylesheet value="{!URLFOR($Resource.ScheduleReports__bootstrap_theme_min)}"/>
+
+<apex:includeScript value="{!$Resource.ScheduleReports__bootstrap_min_js}"/>
+
+<apex:stylesheet value="{!URLFOR($Resource.ScheduleReports__custom_css)}"/>
+<style type="text/css">
+.glyphicon-menu-right::before {
+    content: "\003e";
+}
+.glyphicon-menu-left::before {
+    content: "\003c";
+}
+   .popup
+    {
+        background-color: white;        
+        z-index: 9999;
+        left: 50%;
+        padding:10px;
+        position: absolute;
+        width:Auto;       
+        top:80px;
+    }
+
+    .popupBg
+    {
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 70);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+    }
+
+    
+    .closeButton {
+        float: right;
+   }
+   
+  thead th {
+    width: 100%;
+    float: left;
+    background: seagreen;
+    
+}
+
+.bPageBlock {
+    background-color: #f0ffff;
+    
+    width: 50%;
+}
+/*****************steps css start here************/
+.custom-col-green{
+    background: rgba(162, 255, 151, 0.44) none repeat scroll 0 0;
+    border-radius: 5px;
+    color: #563232;
+    display: block;
+    font-family: "Open Sans";
+    margin-bottom: 0.8%;
+    padding: 3% 5px 3%;
+}
+.steps-circle{
+    border: 2px solid #ffffff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #ffffff;
+    float: left;
+    font-size: 63px;
+    height: 230px;
+    margin-left: 4%;
+    padding-top: 62px;
+    text-align: center;
+    width: 230px;
+} 
+.custom-col-green p {
+    color:#563232;
+    font-size: 16px;
+    font-weight: 400;
+}
+.select-object {
+    color: #563232;
+    font-size: 32px;
+    font-weight: 400;
+} 
+
+.emailcss{
+        padding-right: 10%;
+        
+}  
+    .error{
+            color: red;
+    padding-left: 43%;
+    padding-top: 1% !important;
+    padding-bottom: 1%;
+    display: block;
+    font-weight: 600;
+    font-size: 18px;
+    }
+
+/*****************steps css end here************/
+
+/*****select drop down css start here **********/
+.select-menu {
+    padding:3px;
+    margin: 0;
+    font-size: 18px !important;
+    height: 50px !important;
+    margin-top: 5%;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    -webkit-box-shadow: 0 2px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 2px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 2px 0 #ccc, 0 -1px #fff inset;
+    background: #f8f8f8;
+    color:#4c4c4c;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    width: 100%;
+}
+.select-menu option{
+    padding-left: 5px;
+    border: none;
+}
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+   @media screen and (-webkit-min-device-pixel-ratio:0) {
+    .select-menu {padding-right:18px}
+}
+.menu {position:relative}
+.menu:after {
+    content:'>';
+    font:38px "Consolas", monospace;
+    color:#aaa;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:15px; top:-14px;
+    padding:0 0 2px;
+    border-bottom:1px solid #ddd;
+    position:absolute;
+    pointer-events:none;
+}
+.menu:before {
+    content:'';
+    right:10px; top:0px;
+    width:20px; height:10px;
+    background:#f8f8f8;
+    position:absolute;
+    pointer-events:none;
+    display:block;
+}
+/*****select drop down css endhere **********/
+.pagerNew li {
+    margin-right: 1em;
+    list-style: none;
+} 
+.pagerNewPrev li{
+    margin-left: 1em;
+    list-style: none;
+}
+.pagerNew li > a, .pagerNew li > span{
+    background-color: #119548;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 14px;
+    color: #fff;
+    font-size: 18px;
+}
+.pagerNew li > a:hover, .pagerNewPrev li a:hover{
+    text-decoration: none;
+    background-color: #119548;
+}
+.pagerNewPrev li > a, .pagerNewPrev li > span{
+    background-color: #a0a0a0;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 14px;
+    color: #fff;
+    font-size: 28px;
+    line-height: 40px;
+}
+
+/*************top steps start here************/
+.steps_wrapper {
+    background: #a0a0a0 none repeat scroll 0 0;
+    height: 5px;
+    margin: 5% auto 4%;
+    width: 735px;
+}
+.step_1, .step_2, .step_3, .step_4, .step_5, .step_active {
+    background: #17c07a none repeat scroll 0 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #ffffff;
+    float: left;
+    font-family: open sans;
+    font-weight: 600;
+    height: 74px;
+    margin-left: -10px;
+    margin-top: -36px;
+    padding-top: 26px;
+    text-align: center;
+    width: 78px;
+}
+.step_2{
+    margin-left: 12%;   
+}
+.step_3{
+    margin-left: 12%;   
+}
+.step_4{
+    margin-left: 12%;   
+}
+.step_5{
+    float: right;
+    margin-right: -5px; 
+}
+.step_active {
+    background: #267121;
+}
+
+
+/*************top steps end here************/
+
+.message {    
+    width: 350px;
+    height: 100px;
+}
+.extra-row   {
+    border: solid 1px #f6f6f6;border-radius: 5px;padding: 10px; margin-bottom: 20px; background: #fcfcfc;
+    }
+.extra-button{
+    background: #6c6969;
+    padding: 12px;
+    color: #fff;
+    border: none;
+    font-size: 17px;
+    font-weight: 400;
+} 
+.desc{
+    margin: 0px;
+    width: 100%;
+    height: 49px;
+    resize: none;
+    border-radius: 5px;
+    border: solid 1px #ccc;
+}
+.name-area{
+    padding: 4px;
+    border-radius: 5px;
+    border: solid 1px #ccc;
+    height: 49px;
+}
+.desc-output {
+    margin: 0px;
+    width: 100%;
+    height: 68px;
+    resize: none;
+    border-radius: 5px;
+    background: #fff;
+    padding: 5px;
+}
+.borderStyle
+{
+border: 1px solid black;
+}
+.texts .textBoxes,.col-xs-4 .textBoxes
+{
+padding: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+width:45%;
+}
+.record-data table{
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    
+}
+
+.record-data th{
+    background: #17c07a;
+    padding: 10px;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;    
+}
+
+.record-data td{
+    padding: 10px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.record-data tbody tr:nth-child(odd){
+    background: rgba(61, 139, 89, 0.39);
+}
+
+.record-data tbody tr:nth-child(even){
+    background: rgba(61, 139, 89, 0.16);
+}
+
+.err-panel{
+background: #eed5d5;
+    display:none;
+    width: 114.5%;
+    margin-left: -84px !important;
+    border-radius: 3px;
+    padding: 16px;
+    color: black;
+    font-size: 15px;
+
+}
+</style>
+
+<style type="text/css">
+.container-fluid{
+    font-family: "Open Sans";
+    width: 100%;
+    }
+.innerContainerBg{
+    background: transparent url('/resource/1449662848000/patternbg') repeat 0 0;
+    background-color: rgba(162, 255, 151, 0.44);
+}
+.container-fluid h1{
+    font-size: 31px;
+    font-weight: 500;
+    color: black;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+}
+.container-fluid h4{
+    font-size: 18px;
+    font-weight: 400;
+    color: #3c3c3c;
+    text-align: center;
+    display: block;
+}
+.container-fluid button{
+    font-size: 22px;
+    font-weight: 400;
+    font-family: "Open Sans";
+
+}
+.sm-logo{
+    width: 372px;
+    height: 133px;
+    margin: 0 auto;
+    margin-top: 69px;
+}
+.clear-bottom{
+    clear: both;
+    display: block;
+    margin-bottom: 7%;
+    margin-top: 2%;
+}
+/**********breadcrumb start here****************/
+.steps { 
+    list-style: none; 
+    overflow: hidden; 
+    width: 84.5%;
+    margin: 0 auto;
+}
+.steps li {
+    color: white;
+    text-decoration: none; 
+    padding: 10px 0 10px 25px;
+    background: brown;               
+    background: #2c7356; 
+    position: relative; 
+    display: block;
+    float: left;
+    margin-right: 7%;
+    width: 43%;
+    height: 98px;
+}
+.steps li:after { 
+    content: " "; 
+    display: block; 
+    width: 0; 
+    height: 0;
+    border-left: 30px solid #2c7356;
+    border-top: 50px solid transparent;         
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px; 
+    left: 100%;
+    z-index: 2; 
+}
+.step-title{
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+}
+.step-text{
+    font-size: 14px; 
+    display: block;
+    font-weight: 400;
+}
+.customPopup {
+  background-color: rgba(127, 183, 124, 0.73);
+    border-style: solid;
+    border-width: 1px;
+    left: 48%;
+    padding: -5px;
+    height: 82px;
+    position: absolute;
+    z-index: 10014;
+    width: 324px;
+    top: 32%;
+}
+    .pageSize{
+        padding: 7px;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+        color: black;
+        margin-left: 5%;
+    }
+    .searchBtn{
+        font-weight: 600 !important;
+        border-radius: 5px !important;
+        width: 13% !important;
+    }
+</style>
+
+<script>
+    function goToBack1Script(){
+    var checkValue = document.getElementById('{!$Component.frm:showlanding}').checked;
+    
+        if(checkValue==true){
+            if(confirm('You will not be able to view this page again. Do you want to proceed ?')){
+                goToStep11();
+                }
+           }
+           else{
+                goToStep11();
+           }
+        } 
+</script>
+</head>
+<body>
+
+   <apex:pageMessage summary="Your eCourier licence has expired, Please contact us at sales@mirketa.com to renew your license." rendered="{!expired}" severity="info" strength="3" />
+
+                
+<apex:form id="frm">
+        <div style="margin-top: 15px;">
+           <apex:outputPanel id="errorPanel" rendered="{!showErr}">
+               <apex:messages styleclass="alert alert-danger" style="padding-left:-10px;width:100%;"/>
+           </apex:outputpanel>
+        </div>
+            <div id="errorPanelex" style="display:none;">
+                <apex:outputText styleclass="alert alert-danger" style="padding-left:-10px;width:100%;" value="The number of characters in your description has exceeded limit!!" />               
+            </div>         
+<apex:outputPanel id="mainPanal">
+        <div class="container" style="position:relative;">
+        <div class="row err-panel" id="err" style="margin-top: 8px;">Error: Select Report.</div>
+         <!----------------------------------------------------Custom Popup---------------------------------------------------------------------->
+    <div class="customPopup" id="popup" style ="display : none; color:#bf1414" >
+        <div >
+            <center><label><b>Error</b></label></center>
+        </div>
+        <div >
+            <center id="msgForConfirmation"></center>
+            <div class="cl"></div> 
+        </div>
+        <div >
+            <center><apex:commandButton value="OK" title="OK" onclick="closepopup();return false;" /></center>
+        </div>                  
+    </div>
+    <!----------------------------------------------------End Custom Popup---------------------------------------------------------------------->
+            
+                    <!-------------------------------------------------------Landing Page------------------------------------------------------------->
+                    
+         <apex:outputPanel rendered="{!!hidemode}">
+         <apex:actionFunction name="goToStep11" action="{!nexttoStep1}"/>
+         <div class="innerContainerBg">
+             <div class="container">
+                 <div class="container-fluid">
+        <div class="sm-logo"><apex:image url="{!$Resource.ScheduleReports__rslogo}"/></div>
+        <!--<h1>Report Scheduler</h1>--><br/>
+        <h4 style="font-weight:600;font-family:Open Sans;">This is an application that lets you send all your reports ( Standard or Custom ) to any user, contact or even external email addresses. You can schedule these deliveries as preferred in just a few steps. So lets get started!</h4>
+
+       <br/><br/>
+        <div class="row">
+            <ul class="steps">
+                <li>
+                     <span class="step-title"><strong>Step 1:&nbsp;</strong> Setup Report for Scheduling   </span>
+                     <span class="step-title"><strong>Step 2:&nbsp;</strong> Set Frequency for the Schedule   </span>
+                     <span class="step-title"><strong>Step 3:&nbsp;</strong> Set Email Template   </span>
+                </li>
+                <li>
+                    <span class="step-title"><strong>Step 4:&nbsp;</strong> Select Recipients   </span>
+                    <span class="step-title"><strong>Step 5:&nbsp;</strong> Enable Scheduler </span>
+                </li>
+            </ul>
+        </div><br/><br/>
+         <div style="padding-left: 426px;">
+             <p>Do not show this page again &nbsp;&nbsp;&nbsp; <apex:inputField value="{!bsSetting.ScheduleReports__Show_Page__c}" label="" id="showlanding"/> </p>                        
+         </div>
+         <div class="row clear-bottom" style="padding-left: 465px;">
+             <button type="button" class="btn-warning btn-lg" style="width: 195px;font-weight:900" onclick="goToBack1Script();">Get Started</button>           
+         </div>
+    </div>
+    </div></div>
+  </apex:outputPanel>                    
+                    
+                    <!-------------------------------------------------------Step1-------------------------------------------------------------------->
+                    
+    <apex:outputPanel id="stp1" rendered="{!viewmode}">
+    <apex:actionFunction name="getrep" action="{!getsearchStandardReportsNav}" reRender="theSearchString,pbtable,prev,next"/>
+        
+        <script>
+        
+    function checkError(){
+    let flag=0;
+    $(".record-data").find("input").each(function(){
+        if($(this).is(":checked") || selected==true){
+            flag=1;
+        }
+    });
+    if(checked.length==0){
+        flag=0;
+    }
+    if(flag==0){
+        $("#err").show();
+        return false;
+    }
+    goToStep2();
+    
+    }
+    </script>
+        <apex:actionFunction name="goToStep2" action="{!next}"/>
+        <!--<apex:actionFunction name="nextTab" action="{!nextTab}"/>-->
+        <div class="steps_wrapper">
+                    <div class="step_1 step_active">Step 1</div>
+                    <div class="step_2">Step 2</div>
+                    <div class="step_3">Step 3</div>
+                    <div class="step_4">Step 4</div>
+                    <div class="step_5">Step 5</div>
+        </div>
+        
+        <script>
+        
+        $(function(){
+            var reportType=$("[id*='report-type']").val();
+            showTable(reportType);
+            if(reportType!==''){
+                $("#").show();
+            }
+            showtab(reportType);
+            if(checked.length>0){
+                for(c in checked){
+                    $("[id*="+checked[c]+"]").prop("checked",true);
+                }
+            }
+            if('{!retained}'!=null){
+                checkRadio(null);
+            }
+        });
+        
+        function checkRadio(id){
+        
+            checked=[];
+            var alreadySelected = '';
+            
+            if(id==null){
+            if('{!retained}'!=null){
+                var v = '{!retained}';
+                alreadySelected = '{!retainSelected}'; 
+                var l = alreadySelected.length;
+                
+                var bool = alreadySelected[l-5]+alreadySelected[l-4]+alreadySelected[l-3]+alreadySelected[l-2];
+          
+                if(bool=='true'){
+                    checked.push(v);
+                }
+            }
+            selected = true;
+            }
+            else{
+            if($("[id*="+id+"]").is(":checked")){
+                checked.push(id);
+                selected = true;
+                }
+                }
+        }
+        //}
+        </script>
+                
+                    <div class="row custom-col-green">
+                        <div style="float: right;padding-right: 75px;height: 15px;">
+                           <label style="color:red;">*</label><label>&nbsp;Mandatory Fields</label>
+                        </div>
+                            <div class="col-xs-5" style="padding-left: 4%;">   
+                                <label class="control-label select-object">Report Setup</label> <br/><br/><br/>
+                                    <p style="color:black;"><label style="color:red;">*</label>Select report type &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <apex:inputField id="report-type" value="{!cr.ScheduleReports__Report_Type__c}" style="padding:7px;border-bottom-left-radius:7px;border-bottom-right-radius:7px;border-top-left-radius:7px;border-top-right-radius:7px;color:black;width:53%;" onchange=" showTable(this)">
+                                    
+                                </apex:inputField> </p>                                                          
+                                                                                                        
+                            </div>
+           <div class="col-xs-7" style="display:none; padding-top:6.5%;" id="searchTab" title="Search">
+                               <p style="color:black;">Search report by name       
+               
+                <apex:inputText styleClass="pageSize" value="{!searchText}" id="theSearchString" maxlength="250" size="18" style="padding:7px;border-bottom-left-radius:7px;border-bottom-right-radius:7px;border-top-left-radius:7px;border-top-right-radius:7px;color:black;width:36%;"/> &nbsp;
+                 <apex:CommandButton Id="btnSearch" styleClass="searchBtn" action="{!getsearchStandardReports}" rerender="theSearchString,nxtBtn,pbtable,prev,next" value="Search" />
+                
+                                   <apex:selectList id="lst-size" value="{!list_size}" size="1" onchange="getrep();" styleClass="pageSize">
+                <apex:selectOptions value="{!ViewSize}"/>
+                 </apex:selectList>  
+               </p>
+               
+           </div> 
+
+                        
+                            <apex:actionfunction name="selectedReport" action="{!selectedReport}" reRender="">
+                                <apex:param name="repid" value=""/>
+                                <apex:param name="repname" value=""/>
+                            </apex:actionfunction>
+                        
+
+                            
+                            
+                            <apex:actionfunction name="showtab" action="{!onchangeType}" reRender="lst-size,theSearchString,pbtable,prev,next">
+                                <apex:param name="reptype" value=""/>
+                            </apex:actionfunction>
+                             <div id="divfortab" style="display:none">
+                             <apex:outputPanel id="pbtable">
+                             <script>
+                                 $(function(){
+                                     var showError="{!showErr}";
+                                     if(showError=="true"){
+                                        $("[id*='nxtBtn']").css("display","none"); 
+                                     }else{
+                                         $("[id*='nxtBtn']").css("display","inline-block");
+                                     }
+                                     for(c in checked){
+                                         $("[id*="+checked[c]+"]").prop("checked",true);
+                                     }
+                                 });
+                             </script>
+                             <div style="border-radius:5px;border: solid 2px #17c07a;float: left;width: 100%;margin-top: 25px;">
+                             
+                                 <table border="0" class="record-data" width="100%">
+                                     <thead>
+                                        <tr>
+                                            <th>Report Name</th>
+                                        </tr>
+                                     </thead>
+                                     <tbody>
+                                         <tr><td style="padding:0;"><apex:outputText value="No matching records found!!!" styleClass="error" style="padding-top:0;" rendered="{!showErr}"/>
+                                    </td></tr>
+                                         <apex:repeat var="rep" value="{!ListwrapperReport}">
+                                         <tr>
+                                             <td>
+                                                 <input type="radio" name="selectRadio" id="'{!rep.WrapperId}'" onclick="selectedReport('{!rep.WrapperId}','{!rep.WrapperName}'); $('#err').hide(); checkRadio(this.id);">                                       
+                                                        &nbsp;&nbsp;<b>{!rep.WrapperName}</b>
+                                                 </input> 
+                                             </td>
+                                         </tr>
+                                     </apex:repeat>
+                                    </tbody> 
+                                </table>
+                                </div>
+                                
+                    <div style="width: 100%;display: inline-block;">                                    
+                                <apex:commandButton id="prev" reRender="pbtable,prev,next" disabled="{!hasprevious}" action="{!PreviousPagination}" style="background: #17c07a;color: white;border-color: #119548;width: 50px;font-size: initial;margin-right: 90.5%;margin-left: 0%;" value="<<"/>&nbsp;&nbsp;
+                                <apex:commandButton id="next" reRender="pbtable,prev,next" disabled="{!hasnext}" action="{!NextPagination}" value=">>" style="background: #17c07a;color: white;border-color: #119548;width: 50px;font-size: initial;"/>                                       
+                    </div>
+                 </apex:outputPanel>
+                      </div>       
+                    </div>        
+
+                        <div class="row">
+                            <div class="col-xs-2" style="float: right;margin-right: 444px;">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;">
+                                    <li style="margin-left: 8px;"><a id="nxtBtn" href="javascript:void(0)" onclick="checkError()">Next <span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span></a></li>
+                                </ul>
+                            </div>
+                                <!--<div class="col-xs-2" style="float: right;margin-right: 20px;">
+                                <ul class="pagerNew">
+                                    <li><a href="/apex/ScheduleReports__ReportScheduler">Cancel</a></li>                                    
+                                </ul>
+                            </div>-->
+                        </div>                                                        
+    </apex:outputPanel>
+           
+           <!-------------------------------------------------------Step2-------------------------------------------------------------------->
+           
+    <apex:outputPanel id="outpnl" rendered="{!viewmode2}">
+    
+          <apex:actionFunction name="goToBack1" action="{!back}"/>
+          <apex:actionFunction name="goToStep3" action="{!next2}"/>
+                    
+                    <div class="steps_wrapper">
+                        <div class="step_1">Step 1</div>
+                        <div class="step_2 step_active">Step 2</div>
+                        <div class="step_3">Step 3</div>
+                        <div class="step_4">Step 4</div>
+                        <div class="step_5">Step 5</div>
+                    </div>
+                   
+                    <div class="row custom-col-green">
+                       <div style="float: right;padding-right: 75px;height: 15px;">
+                           <label style="color:red;">*</label><label>&nbsp;Mandatory Fields</label>
+                       </div>
+                            <div class="col-xs-4" style="margin-left: 4%;width: 100%;" >   
+                                <label class="control-label select-object">Basic Information</label><br/><br/>
+                                 <apex:outputLabel rendered="{!cr.ScheduleReports__Report_Type__c=='Standard Report'}">Select Report Name, Extension, Scheduler Name and Frequency</apex:outputLabel>
+                                 <apex:outputLabel rendered="{!cr.ScheduleReports__Report_Type__c=='Visualforce Report'}">Select Report Name, Scheduler Name and Frequency</apex:outputLabel><br/><br/>
+                                 
+                                 <div class="texts" style="float: left; width: 50%;"> 
+                                     
+                                     <apex:outputLabel style="padding-right: 73px;" rendered="{!cr.ScheduleReports__Report_Type__c=='Standard Report'}"><label style="color:red;">*</label>Attachment Extension</apex:outputLabel><apex:inputField value="{!cr.ScheduleReports__Attachment_Extension__c}" rendered="{!cr.ScheduleReports__Report_Type__c=='Standard Report'}" styleclass="textBoxes"/>                                     
+                                     <br/><br/>
+                                     <apex:outputLabel style="padding-right: 52px;padding-left: 7px;">Send Now</apex:outputLabel><apex:inputField value="{!cr.ScheduleReports__Send_Now__c}" id="checkSend" styleclass="textBoxes" onchange="disableScheduler();"/>
+                                     <br/><br/>
+                                     <apex:outputLabel style="padding-right: 115px"><label style="color:red;">*</label>Scheduler Name</apex:outputLabel><apex:inputField value="{!cr.ScheduleReports__Scheduler_Name__c}" styleclass="textBoxes" id="schedName"/>
+                                     <br/><br/>
+                                     <apex:outputLabel style="padding-right: 150px;padding-top: 22px;float: left;padding-left: 7px;">Description</apex:outputLabel><apex:inputField value="{!cr.ScheduleReports__Description__c}" styleclass="textBoxes" style="height:95px" id="description" onkeypress="checkLength(this);"/>  
+                                     <br/><br/>
+                                     
+                                 </div>
+                                   
+                                 <div class="texts" style="float: left; width: 50%;">
+                                     <apex:outputLabel style="padding-right: 163px;">Frequency</apex:outputLabel><apex:inputField value="{!cr.ScheduleReports__Frequency__c}" styleclass="textBoxes" id="freq"/>
+                                     <br/><br/>
+                                     <apex:outputLabel style="padding-right: 135px;">First Run Hour</apex:outputLabel><apex:inputField value="{!cr.ScheduleReports__Hour__c}" styleclass="textBoxes"/>
+                                     <br/><br/>
+                                     <apex:outputLabel style="padding-right: 186px;">Minute</apex:outputLabel><apex:inputField value="{!cr.ScheduleReports__Minute__c}" styleclass="textBoxes"/>         
+                                     <br/><br/>
+                                     <apex:outputLabel style="padding-right: 108px;">Date of the Month</apex:outputLabel><apex:inputField value="{!cr.ScheduleReports__Date_of_the_Month__c}" styleclass="textBoxes"/>
+                                     <br/><br/>
+                                     <apex:outputLabel style="padding-right: 122px;">Day of the Week</apex:outputLabel><apex:inputField value="{!cr.ScheduleReports__Day_of_the_Week__c}" styleclass="textBoxes"/>                                    
+                                 </div>
+                            </div>
+                        </div>     
+                        <div class="row">
+                            <div class="col-xs-2" style="float: right;margin-right: 235px;">
+                                <ul class="pagerNew" style="{!if(recId==null,'padding: 0px; margin: 0px;','padding: 0px; margin: 0px;margin-left:-105px')}">
+                                    <li><a href="javascript:void(0)" onclick="goToStep3();">Next <span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span></a></li>
+                                    
+                                </ul>
+                            </div> 
+                            <div class="col-xs-2" style="float: right;margin-right: 75px;">
+                                <ul class="pagerNew" style="{!if(recId==null,'','margin-left:-90px')}">
+                                    <li style="margin-left: 18px;"><a href="{!if(recId==null,'/apex/ScheduleReports__ReportScheduler',if(recId!=null && previousPageName !=null,'/apex/ScheduleReports__ReportSchedulerListView','/apex/ScheduleReports__ReportSchedulerDetail?id='+recId))}">Cancel</a></li>
+                                </ul>
+                            </div>  
+                            <div class="col-xs-2" style="{!if(recId==null,'margin-left:275px;display:block','display:none')}">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;">
+                                    <li style="margin-left: 35px;"><a href="javascript:void(0)" onclick="goToBack1();"><span aria-hidden="true" class="glyphicon glyphicon-menu-left"></span> Back</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>         
+            
+    </apex:outputPanel>
+    
+    <!-------------------------------------------------------Step3-------------------------------------------------------------------->
+    
+    <apex:outputPanel id="outpnl2" rendered="{!viewmode3}">
+          <apex:actionFunction name="goToBack2" action="{!back2}"/>
+          <apex:actionFunction name="goToStep4" action="{!next3}"/>
+          
+                <div class="steps_wrapper">
+                    <div class="step_1">Step 1</div>
+                    <div class="step_2">Step 2</div>
+                    <div class="step_3 step_active">Step 3</div>
+                    <div class="step_4">Step 4</div>
+                    <div class="step_5">Step 5</div>
+                </div>
+                <div class="row custom-col-green">
+                        <div style="float: right;padding-right: 75px;height: 15px;">
+                           <label style="color:red;">*</label><label>&nbsp;Mandatory Fields</label>
+                        </div>
+                            <div class="col-xs-4" style="margin-left: 4%;width: 64%;">
+                            <label class="control-label select-object">Email</label><br/><br/>
+                            <p>Enter Subject and Body of Email Template</p><br/>
+                        
+                                 <apex:outputLabel style="padding-right: 99px;"><label style="color:red;">*</label>Subject</apex:outputLabel>&nbsp;&nbsp;&nbsp;<apex:inputField value="{!cr.ScheduleReports__Subject__c}" id="Subject" styleclass="textBoxes"/>
+                                 <br></br>
+                                 <apex:outputLabel style="padding-left: 7px;">Body</apex:outputLabel>&nbsp;&nbsp;&nbsp;<apex:inputTextarea richText="true" value="{!cr.ScheduleReports__Body__c}" style="padding:7px;border-bottom-left-radius:7px;border-bottom-right-radius:7px;border-top-left-radius:7px;border-top-right-radius:7px;"/>                                   
+                           
+                            </div>
+                </div>     
+                    <div class="row">
+                        <div class="col-xs-2" style="float: right;margin-right: 235px;">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;">
+                                    <li><a href="javascript:void(0)" onclick="checkForSymbols();">Next <span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span></a></li>
+                                    
+                                </ul>
+                            </div> 
+                            <div class="col-xs-2" style="float: right">
+                                <ul class="pagerNew" style="margin-left: -63px;">
+                                    <li style="margin-left: 18px;"><a href="{!if(recId==null,'/apex/ScheduleReports__ReportScheduler',if(recId!=null && previousPageName !=null,'/apex/ScheduleReports__ReportSchedulerListView','/apex/ScheduleReports__ReportSchedulerDetail?id='+recId))}">Cancel</a></li>
+                                </ul>
+                            </div>  
+                            <div class="col-xs-2" style="margin-left: 295px;">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;">
+                                    <li style="margin-left: 35px;"><a href="javascript:void(0)" onclick="goToBack2();"><span aria-hidden="true" class="glyphicon glyphicon-menu-left"></span> Back</a></li>                                    
+                                </ul>
+                            </div>                                                
+                    </div>       
+    </apex:outputPanel>
+    
+    <!-------------------------------------------------------Step4-------------------------------------------------------------------->
+    
+    <apex:outputPanel id="outpnl3" rendered="{!viewmode4}">
+          <apex:actionFunction name="goToBack3" action="{!back3}"/>
+          <apex:actionFunction name="goToStep5" action="{!next4}" reRender="frm"/>
+                <div class="steps_wrapper">
+                    <div class="step_1">Step 1</div>
+                    <div class="step_2">Step 2</div>
+                    <div class="step_3">Step 3</div>
+                    <div class="step_4 step_active">Step 4</div>
+                    <div class="step_5">Step 5</div>
+                </div>
+                <div class="row custom-col-green">
+                        <div style="float: right;padding-right: 75px;height: 15px;">
+                           <label style="color:red;">*</label><label>&nbsp;Mandatory Fields</label>
+                        </div>
+                            <div class="col-xs-4" style="margin-left: 6%;width: 64%;">
+                            <label class="control-label select-object">Select Recipients</label><br/><br/>
+                            <p>Select Multiple Contacts, Users and External Email Addresses here</p><br/>
+                                 <apex:outputLabel style="padding-right: 17%;"><label style="color:red;">*</label>Recipient Type</apex:outputLabel>
+                                 <apex:selectList value="{!selectedRecipientType}" size="1" onchange="RecpntTypeShowHide(this);" id="rectype" styleClass="textBoxes">
+                                     <apex:selectOptions value="{!listOfrecType}" id="type"/>
+                                 </apex:selectList>
+                                 
+                                 <br/><br/>
+                                 <div id="maindiv" style="display:none;">
+                                 <div id="contacts" style="display:none;">
+                                    
+                                     <apex:outputLabel style="padding-right: 60px;padding-top: 9px;float: left;" ><label style="color:red;">*</label>Search to add a contact </apex:outputLabel>
+                                     <apex:inputField value="{!recipients.ScheduleReports__Contact__c}" styleClass="textBoxes" id="con"/>
+                                     
+                                 </div>                           
+                                 
+                                 <div id="users" style="display:none">                                     
+                                     <apex:outputLabel style="padding-right: 82px;padding-top: 9px;float: left;" ><label style="color:red;">*</label>Search to add a user </apex:outputLabel>
+                                     <apex:inputField value="{!recipients.ScheduleReports__User__c}" styleClass="textBoxes" id="user"/>
+                                 </div>     
+                                 
+                                 <apex:outputLabel style="padding-right: 112px;padding-top: 9px;float: left;display:none;" id="nameLabel"><label style="color:red;">*</label>Recipient Name</apex:outputLabel>
+                                 <apex:inputField styleClass="textBoxes" value="{!recipients.ScheduleReports__External_Recipient_Name__c}" style="display:none;" id="nameValue"/>
+                                 <br></br>
+                                 
+                                 <apex:outputLabel style="padding-right: 125px;padding-top: 9px;float: left;display:none;" id="emailLabel"><label style="color:red;">*</label>Email Address</apex:outputLabel>
+                                 <apex:inputField styleClass="textBoxes" value="{!recipients.ScheduleReports__External_Recipient_Email__c}" style="display:none;" id="emailValue"/>
+                                 <br></br>
+                                  
+                                 <apex:commandButton value="Add Recipients" onclick="add(); return false;" reRender="outpnlList" id="showButton" style="background:#17c07a!important;border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;border-top-left-radius: 8px;border-top-right-radius: 8px;color:white;height: 39px;">
+                                     <apex:actionFunction action="{!addRepRecipients}" name="getValue" reRender="outpnlList">
+                                     <apex:param name="strParam" value="" assignTo="{!tempEmail}"/>
+                                     </apex:actionFunction>
+                                 </apex:commandButton>                                
+                                 
+                                 </div>
+                                 <br/><br/>
+                                 <div style="display:block;" id="recdiv">                                 
+                                 <apex:outputPanel id="outpnlList" rendered="{!showRecs}">
+                                 <div >
+                                   <apex:outputPanel rendered="{!showErr}">
+                                       <apex:messages styleclass="alert alert-danger" style="padding-left:-10px;width:100%;"/>
+                                   </apex:outputpanel>
+                                 </div>
+                                  
+                                     <apex:variable value="{!1}" var="rowNum"/>
+                                     <div id="table" style="overflow-y: auto;max-height:100px;width:40%;overflow-x: hidden;padding: 10px;">
+                                         <table id="table1">
+                                             
+                                            <apex:repeat var="rec" value="{!allRecipients}">
+                                             
+                                             <tr style="padding-left:5px;border:none;">
+                                                <td style="border:none; width: 20%;"><a href="javascript:if (window.confirm('Are you sure?')) deleteEmail('{!rec}');" style="font-weight:bold">Remove&nbsp;&nbsp;&nbsp;</a></td>
+                                                <td style="border:none; width: 70%;">{!rec}</td>                                                
+                                             </tr>
+                                             
+                                             <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+                                             </apex:repeat>
+                                             
+                                             <apex:actionFunction action="{!deleteEmail}" name="deleteEmail" reRender="outpnlList" >
+                                                 <apex:param name="Email" value="" assignTo="{!tempEmailToDel}"/>
+                                             </apex:actionFunction>
+                                         </table>
+                                         </div>
+                                         <br/>
+                                </apex:outputPanel>
+                                </div> 
+                            </div>
+                </div>
+                    <div class="row">
+                    <script>
+                    function goToStep5CheckErrors(){
+                       var count=0;
+                        $("#table1").find("tr").each(function(){
+                            count++;
+                        });
+                        
+                        var rec = document.getElementById('{!$Component.frm:rectype}').value;
+                        var u = document.getElementById('{!$Component.frm:user}').value;
+                        var c = document.getElementById('{!$Component.frm:con}').value;
+                        var name = document.getElementById('{!$Component.frm:nameValue}').value;
+                        var email = document.getElementById('{!$Component.frm:emailValue}').value;
+                         
+                         if(count==0){
+                         if(rec=='--None--'){
+                             
+                                 //alert('Select Recipient Type');
+                                 document.getElementById('msgForConfirmation').innerHTML='Select Recipient Type'; 
+                                 document.getElementById('popup').style.display= 'block';
+                                  document.getElementById('j_id0:frm:rectype').value = "--none--";
+                         }
+                         else if(rec=='Contacts'){
+                             if(c!=""){
+                                 //alert('Add the recipient');
+                             document.getElementById('msgForConfirmation').innerHTML='Add the recipient'; 
+                             document.getElementById('popup').style.display= 'block';
+                             document.getElementById('j_id0:frm:rectype').value = "--none--";
+                                     
+                             }
+                             else
+                                // alert('Select Contact');
+                                document.getElementById('msgForConfirmation').innerHTML='Select Contact'; 
+                                 document.getElementById('popup').style.display= 'block';
+                                  document.getElementById('j_id0:frm:rectype').value = "--none--";
+                         }
+                         else if(rec=='Users'){
+                             if(u!=""){
+                                 //alert('Add the recipient');
+                                 document.getElementById('msgForConfirmation').innerHTML='Add the recipient'; 
+                                 document.getElementById('popup').style.display= 'block';
+                                 document.getElementById('j_id0:frm:rectype').value = "--none--";
+                             }
+                             else
+                                 //alert('Select User');
+                                 document.getElementById('msgForConfirmation').innerHTML='Add the recipient'; 
+                                 document.getElementById('popup').style.display= 'block';
+                                 document.getElementById('j_id0:frm:rectype').value = "--none--";
+                         }
+                         else if(rec=='External Email Address'){
+                             if(name=="" && email==""){
+                                 //alert('Enter Recipient Name and Email Address');
+                                 document.getElementById('msgForConfirmation').innerHTML='Select User'; 
+                                 document.getElementById('popup').style.display= 'block';
+                                  document.getElementById('j_id0:frm:rectype').value = "--none--";
+                             }
+                             if(email=="" && name!=""){
+                                // alert('Enter Recipient Email Address');
+                                document.getElementById('msgForConfirmation').innerHTML='Enter Recipient Name and Email Address'; 
+                                 document.getElementById('popup').style.display= 'block';
+                                  document.getElementById('j_id0:frm:rectype').value = "--none--";
+                             }
+                             if(email!="" && name==""){
+                                 //alert('Enter Recipient Name');
+                                 document.getElementById('msgForConfirmation').innerHTML='Enter Recipient Name'; 
+                                 document.getElementById('popup').style.display= 'block';
+                                  document.getElementById('j_id0:frm:rectype').value = "--none--";
+                             }
+                             if(email!="" && name!=""){
+                                 //alert('Add the Recipient');
+                                 document.getElementById('msgForConfirmation').innerHTML='Add the Recipient'; 
+                                 document.getElementById('popup').style.display= 'block';
+                                  document.getElementById('j_id0:frm:rectype').value = "--none--";
+                             }                           
+                             
+                         }    
+                         else{
+                             goToStep5();
+                         } 
+                         }
+                         else{
+                             goToStep5();
+                         }               
+                        
+                    }
+                    </script>
+                            <div class="col-xs-2" style="float: right;margin-right: 235px;">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;">
+                                    <li><a href="javascript:void(0)" onClick="goToStep5CheckErrors();">Next <span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span></a></li>
+                                    
+                                </ul>
+                            </div> 
+                            <div class="col-xs-2" style="float: right">
+                                <ul class="pagerNew" style="margin-left: -63px;">
+                                    <li style="margin-left: 18px;"><a href="{!if(recId==null,'/apex/ScheduleReports__ReportScheduler',if(recId!=null && previousPageName !=null,'/apex/ScheduleReports__ReportSchedulerListView','/apex/ScheduleReports__ReportSchedulerDetail?id='+recId))}">Cancel</a></li>
+                                </ul>
+                            </div>  
+                            <div class="col-xs-2" style="margin-left: 295px;">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;">
+                                    <li style="margin-left: 35px;"><a href="javascript:void(0)" onclick="goToBack3();"><span aria-hidden="true" class="glyphicon glyphicon-menu-left"></span> Back</a></li>
+                                    
+                                </ul>
+                            </div>
+                     </div>
+    </apex:outputPanel>
+    
+    <!-------------------------------------------------------Step5-------------------------------------------------------------------->
+    
+    <apex:outputPanel id="outpnl4" rendered="{!viewmode5}">
+      <apex:actionFunction name="goToBack4" action="{!back4}"/>
+      <apex:actionFunction name="mySave" action="{!schedulerep}"/>
+      
+                <div class="steps_wrapper">
+                    <div class="step_1">Step 1</div>
+                    <div class="step_2">Step 2</div>
+                    <div class="step_3">Step 3</div>
+                    <div class="step_4">Step 4</div>
+                    <div class="step_5 step_active">Step 5</div>
+                </div>
+                
+                <div class="row custom-col-green">
+                    <div style="float: right;padding-right: 75px;height: 15px;">
+                           <!--<label style="color:red;">*</label><label>&nbsp;Mandatory Fields</label>-->
+                    </div>
+                        <div class="col-xs-4" style="margin-left: 4%;width: 100%;">
+                            <label class="control-label select-object">
+                                Enable Scheduler
+                            </label><br/><br/>
+                            <p>Enable scheduler by checking the box &nbsp;&nbsp;&nbsp; <apex:inputField value="{!cr.ScheduleReports__Enabled__c}" label="" style="padding-right: 10%;"/> </p>                                
+                          
+                            </div>
+                        </div>     
+                        <div class="row">
+                            <div class="col-xs-2" style="float: right;margin-right: 235px;">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;">
+                                    <li><a href="javascript:void(0)" onclick="mySave();">Save <span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span></a></li>
+                                    
+                                </ul>
+                            </div> 
+                            <div class="col-xs-2" style="float: right">
+                                <ul class="pagerNew" style="margin-left: -63px;">
+                                    <li style="margin-left: 18px;"><a href="{!if(recId==null,'/apex/ScheduleReports__ReportScheduler',if(recId!=null && previousPageName !=null,'/apex/ScheduleReports__ReportSchedulerListView','/apex/ScheduleReports__ReportSchedulerDetail?id='+recId))}">Cancel</a></li>
+                                </ul>
+                            </div>  
+                            <div class="col-xs-2" style="margin-left: 295px;">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;">
+                                    <li style="margin-left: 35px;"><a href="javascript:void(0)" onclick="goToBack4();"><span aria-hidden="true" class="glyphicon glyphicon-menu-left"></span> Back</a></li>                                    
+                                </ul>
+                            </div>
+                        </div>
+              </apex:outputPanel>
+           </div>            
+         </apex:outputPanel>
+  </apex:form> 
+  <apex:includeScript value="{!$Resource.ScheduleReports__Jquery_min}"/>
+
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+</body>
+</html>
+</apex:page>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Mirketa</letterhead>
+    <name>Auto response to Ebook user</name>
+    <style>freeForm</style>
+    <subject>Thanks for your request to download our eBook</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

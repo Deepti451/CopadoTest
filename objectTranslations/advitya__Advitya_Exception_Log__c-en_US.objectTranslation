@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Error Cause --></label>
+        <name>advitya__Error_Cause__c</name>
+    </fields>
+    <fields>
+        <label><!-- Exception Line No. --></label>
+        <name>advitya__Exception_Line_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- Log Type --></label>
+        <name>advitya__Log_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Message --></label>
+        <name>advitya__Message__c</name>
+    </fields>
+</CustomObjectTranslation>

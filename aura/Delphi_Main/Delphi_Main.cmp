@@ -1,0 +1,121 @@
+<aura:component controller="DelphiDashboardController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="listOfOpportunities" type="Opportunity[]"/>
+    <aura:attribute name="listOfOpportunitiesToShow" type="Opportunity[]"/>
+    <aura:attribute name="currentPage" type="Integer" default="1"/>
+    <aura:attribute name="userMap" type="Object"/>
+    <aura:attribute name="offset" type="Integer"/>
+    <aura:attribute name="totalCount" type="Integer"/>
+    <aura:attribute name="totalNoOfPages" type="Integer"/>
+    <aura:attribute name="pageSize" type="Integer"/>
+    <aura:attribute name="goToPage" type="Integer"/>
+    <aura:attribute name="disableNext" type="Boolean" default="true"/>
+    <aura:attribute name="disablePrev" type="Boolean" default="true"/>
+    <aura:attribute name="processComplete" type="Boolean" default="true"/>
+    <aura:attribute name="timePredictionSuccess" type="Boolean" default="true"/>
+    <aura:attribute name="ShowPredictionStatus" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    
+    <aura:if isTrue="{!v.processComplete==false}">
+        <!--<lightning:spinner variant="brand" size="large" alternativeText="MY PRED"/>
+         <p> please wait while loading </p>
+          <span class="slds-assistive-text">Loading</span>
+        <lightning:Spinner show="true" type="large" variant="brand" spinnerText="Something happening.." title="Processing" alternativeText="dfewProcessing.."/>-->
+        <div class="back-drop">
+            <div class="demo-only" style="height: 6rem;">
+                <div role="status" class="slds-spinner slds-spinner_medium">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+            <div class="spinner-text">Prediction is under process...</div>
+        </div>
+    </aura:if>
+    <div class="slds-box slds-grid slds-wrap">
+        <div class="slds-col slds-size_12-of-12 slds-box step-header">
+            Ranked Opportunities
+        </div>
+        <aura:if isTrue="{!v.ShowPredictionStatus==false}">
+    
+        <div class="slds-col slds-size_12-of-12 slds-grid slds-wrap slds-box">
+            <div class="slds-col slds-size_12-of-12 slds-grid slds-wrap slds-p-around_small">
+                <div class="slds-text-align_left slds-size_6-of-12">
+                    Total Records: {!v.totalCount}
+                </div>
+                <div class="slds-text-align_right slds-size_6-of-12">
+                    <div>
+                        <span class="slds-m-right_x-small">Page Size:</span>
+                        <lightning:select label="" class="page-size-dropdown" name="pageSize" value="{!v.pageSize}" onchange="{!c.changePageSize}">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </lightning:select>
+                    </div>
+                </div>    
+            </div>
+            <div class="slds-col slds-size_12-of-12">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered opp-table">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th style="width: 10%;" class="slds-text-title_caps" scope="col">Rank</th>
+                            <th class="slds-text-title_caps" scope="col">Opportunity Name</th>
+                            <th style="width: 26%;" class="slds-text-title_caps" scope="col">Recommended Sales Reps</th>
+                            <aura:if isTrue="{!v.timePredictionSuccess}">
+                                <th style="width: 18%;" class="slds-text-title_caps" scope="col">Predicted Close Date</th>
+                            </aura:if>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.listOfOpportunitiesToShow}" var="opp" indexVar="index">
+                            <tr class="slds-hint-parent">
+                                <td style="width: 10%;">{!opp.Ranking}</td>
+                                <td data-label="Opportunity Name"><a href="{!'/'+opp.Id}" target="_blank_">{!opp.Name}</a></td> 
+                                <td style="width: 26%;" data-label="Predicted Sales Reps">
+                                    <aura:iteration items="{!opp.SalesReps}" var="sr" indexVar="i">
+                                        <a href="{!'/'+sr.Id}" target="__blank">{!i+1}. {!sr.Name}</a><br/>    
+                                    </aura:iteration>
+                                </td>
+                                <aura:if isTrue="{!v.timePredictionSuccess}">
+                                    <td style="width: 18%;"  data-label="Predicted Close Date">{!opp.Predicted_Close_Date__c}</td>
+                                </aura:if>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            <div class="slds-col slds-size_4-of-12 slds-p-around_medium">
+                {!v.currentPage}  of {!v.totalNoOfPages}
+            </div>
+            <div class="slds-col slds-size_4-of-12 slds-p-around_medium">
+                <lightning:buttonGroup>
+                    <lightning:button label="Previous" disabled="{!v.disablePrev}" variant="brand" iconName='utility:back' onclick="{!c.prevPage}"/>
+                    &nbsp; &nbsp; &nbsp;
+                    <lightning:button label="Next" disabled="{!v.disableNext}" variant="brand" iconName='utility:forward' iconPosition='right' onclick="{!c.nextPage}"/>
+                </lightning:buttonGroup>
+            </div>
+            <div class="slds-col slds-size_4-of-12 slds-p-around_medium slds-text-align_right">
+                <div>
+                    <span class="slds-m-right_x-small">Page:</span>
+                    <lightning:input name="numberchange" class="go-to-page-box slds-m-right_x-small" type="number" label="Go to page:" value="{!v.goToPage}"/>
+                    <lightning:button disabled="{!v.goToPage == null || v.goToPage == ''}" name="gotopage" label="Go" variant="brand" onclick="{!c.changePage}"/>
+                </div>
+            </div>
+        </div>
+            <br/>
+            <br/>
+                <aura:set attribute="else">
+                    <div style="text-align:center">
+             <img src="{!$Resource.DelphiLogo}" style="width:15%; margin: 0 auto;  margin-top: 40px;"/> 
+                    
+                    <div >
+                   <p style="font-size:24px;color:#29aae2"> <b>Welcome to Delphi</b></p>
+                        <p style="font-size:18px;color:#747474"><b>There is no predicted output. Please move to the Configuration page for initiating prediction.</b></p> 
+                        </div></div>
+        
+        </aura:set>
+           
+    </aura:if>
+  
+    </div> 
+</aura:component>

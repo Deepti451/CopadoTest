@@ -1,0 +1,69 @@
+.THIS .slds-box{
+    background: #fff !important;
+}
+
+.THIS.cDelphi_Configuration{
+    background: #fff !important;
+}
+
+.THIS .or-div{
+    margin: 1% 0% 1% 24%;
+    font-weight: 600;
+}
+
+.THIS .step-header{
+    font-size: 15px;
+   /* background: #676565 !important; */
+     background: #585858 !important;
+    color: #fff;
+    padding: 0.5%;
+}
+
+.THIS .pred-div{
+    padding: 1%;
+}
+
+.THIS .model-btn-div{
+    padding: 9% 0% 9% 4%;
+}
+
+.THIS .radio-div{
+    padding: 10% 0% 0% 0%;
+}
+
+.THIS .fields-div{
+    padding: 1% 0% 0% 4%;
+}
+
+.THIS .slds-form-element__label{
+    font-weight: 600;
+}
+
+.THIS .radio-div-bg{
+   /* background: #cbe0fb !important;*/
+    background : rgb(196, 204, 218) !important;
+}
+
+.THIS.myradios{
+    background: #f1f1f1 !important;
+}
+
+
+.THIS .opp-table{
+    border: solid 1px lightgrey;
+	width: 50%;
+    margin: 0 auto;
+    margin-top: 23%;
+}
+
+.THIS .opp-table th{
+    text-align: left;
+    border-right: solid 1px lightgrey;
+    background: #585858;
+    color: #fff;
+}
+
+.THIS .opp-table td{
+    text-align: center;
+    border-right: solid 1px lightgrey;    
+}

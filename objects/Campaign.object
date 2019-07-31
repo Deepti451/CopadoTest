@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddCampaign</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AdvancedSetup</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <fields>
+        <fullName>ActualCost</fullName>
+    </fields>
+    <fields>
+        <fullName>AmountAllOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>AmountWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>BudgetedCost</fullName>
+    </fields>
+    <fields>
+        <fullName>CampaignImageId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CampaignMemberRecordTypeId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ChimpSync__Last_sync__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last ChimpSync</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ChimpSync__MailChimp_Campaign_URL__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>MailChimp Campaign URL</label>
+        <required>false</required>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>ChimpSync__MailChimp_List__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>MailChimp List</label>
+        <referenceTo>ChimpSync__MailChimp_List__c</referenceTo>
+        <relationshipLabel>Campaigns</relationshipLabel>
+        <relationshipName>Campaigns</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ChimpSync__Segmentation__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Segmentation</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChimpSync__Sync_Member_Activity__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sync Member Activity</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ChimpSync__mailchimp_campaign_id__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>MailChimp Campaign ID</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrencyIsoCode</fullName>
+    </fields>
+    <fields>
+        <fullName>DB_Days__c</fullName>
+        <defaultValue>7</defaultValue>
+        <description>This is used for the &quot;Perfect Data&quot; SE tool</description>
+        <externalId>false</externalId>
+        <label>DB Days</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+    </fields>
+    <fields>
+        <fullName>EDY_ORGCUSTOM__DB__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>DB</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EDY_ORGCUSTOM__Old_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Old Name</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndDate</fullName>
+    </fields>
+    <fields>
+        <fullName>ExpectedResponse</fullName>
+    </fields>
+    <fields>
+        <fullName>ExpectedRevenue</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyActualCost</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyAmountAllOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyAmountWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyBudgetedCost</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyExpectedRevenue</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfContacts</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfConvertedLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfResponses</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberSent</fullName>
+    </fields>
+    <fields>
+        <fullName>IsActive</fullName>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfContacts</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfConvertedLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfResponses</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberSent</fullName>
+    </fields>
+    <fields>
+        <fullName>ORGCUSTOM4_DB__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>ORGCUSTOM4_DB</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ORGCUSTOM4_OLD_NAME__c</fullName>
+        <externalId>false</externalId>
+        <label>ORGCUSTOM4_OLD_NAME</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ParentId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StartDate</fullName>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <type>Picklist</type>
+    </fields>
+    <listViews>
+        <fullName>AllActiveCampaigns</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All Active Campaigns</label>
+    </listViews>
+    <listViews>
+        <fullName>MyActiveCampaigns</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>CAMPAIGN.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Active Campaigns</label>
+    </listViews>
+    <searchLayouts>
+        <customTabListAdditionalFields>CAMPAIGN.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CAMPAIGN.STATUS</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CAMPAIGN.START_DATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>CAMPAIGN.NAME</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CAMPAIGN.NAME</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PARENT_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.CAMPAIGN_TYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.STATUS</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.START_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.END_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.NUM_RESPONSES</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+    <webLinks>
+        <fullName>ChimpSync__Synhronize_with_MailChimp</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Synchronize with MailChimp</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var ChimpSyncNamespace = &apos;ChimpSync__&apos;;
+
+var epochNow = (new Date().getTime())+&apos;&apos;;
+var fancyboxJSScript = document.createElement(&apos;script&apos;);
+fancyboxJSScript.type  = &quot;text/javascript&quot;;
+fancyboxJSScript.src = &apos;/resource/&apos;+epochNow +&apos;/&apos;+ChimpSyncNamespace+&apos;FancyboxJS&apos;;
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(fancyboxJSScript );
+
+//code for custom alert
+var ChimpSyncBox = {
+	campaign_segmentation : &apos;{!JSENCODE(JSINHTMLENCODE(Campaign.ChimpSync__Segmentation__c))}&apos;,
+	campaignName : &apos;{!JSENCODE(JSINHTMLENCODE(Campaign.Name))}&apos;,
+	dateCreated : &apos;{!JSENCODE(JSINHTMLENCODE(TEXT(TODAY())))}&apos;,
+	mc_campaign_id : &apos;{!JSENCODE(JSINHTMLENCODE(Campaign.ChimpSync__mailchimp_campaign_id__c))}&apos;,
+	SF_campaign_id : &apos;{!Campaign.Id}&apos;,
+	orgid : &apos;{!Organization.Id}&apos;,
+	subscriberActivity : (&apos;{!Campaign.ChimpSync__Sync_Member_Activity__c}&apos; == 1) ? &apos;true&apos; : &apos;false&apos;,
+	userEmail : &apos;{!JSENCODE(JSINHTMLENCODE($User.Email))}&apos;,
+	mailchimpList : &apos;{!JSENCODE(JSINHTMLENCODE(Campaign.ChimpSync__MailChimp_List__c))}&apos;.replace(/&apos;/g, &quot;\\&apos;&quot;),
+	ChimpSync_textStart : &apos;&lt;b&gt;What do you want to do?&lt;/b&gt;&apos;,
+	
+    render : function(){		
+		
+		var head = document.head || document.getElementsByTagName(&apos;head&apos;)[0];
+		var style = document.createElement(&apos;style&apos;);
+
+		style.type = &apos;text/css&apos;;
+		if (style.styleSheet){
+		  style.styleSheet.cssText = ChimpSyncBox.styleHTML;
+		} else {
+		  style.appendChild(document.createTextNode(ChimpSyncBox.styleHTML));
+		}
+
+		head.appendChild(style);
+		
+		var dialog = &apos;&lt;div style=&quot;text-align: left;&quot;&gt;&apos;;	
+		
+		dialog += &apos;&lt;div id=&quot;CS_info&quot;&gt;ChimpSync has started ...&lt;/div&gt;&lt;div id=&quot;CS_outer&quot;&gt;&lt;div class=&quot;CS_icon_box&quot;&gt;&lt;img src=&quot;/resource/&apos;+ChimpSyncNamespace+&apos;FancyboxIM/question.png&quot; /&gt;&lt;/div&gt;&lt;div style=&quot;margin:10px 0;&quot;&gt;&apos;+
+			&apos;&lt;b&gt;What do you want to do?&lt;/b&gt;&apos;+
+		&apos;&lt;/div&gt;&apos;+
+		&apos;&lt;div&gt;&apos;;
+		
+		if (!this.mc_campaign_id) {
+			dialog += this.createCampaignHTML + this.syncReportsHTML;
+		} else {
+			dialog += this.createCampaignHTML + this.updateCampaignHTML + this.syncReportsHTML;
+		}
+		
+		dialog += &apos;&lt;div style=&quot;text-align: center;padding-top: 13px;&quot;&gt;&apos; +
+		&apos;&lt;button style=&quot;padding: 3px 13px;background: #c23934;color:white; border: 1px solid #c23934;&quot; onclick=&quot;window.location.reload();&quot;&gt;Close&lt;/button&gt;&apos;+
+		&apos;&lt;button style=&quot;padding: 3px 13px;&quot; onclick=&quot;window.ChimpSync.continue(\&apos;&apos; + this.SF_campaign_id + &apos;\&apos;,\&apos;&apos; + this.orgid + &apos;\&apos;,\&apos;&apos; + this.mc_campaign_id + &apos;\&apos;,\&apos;&apos; + this.campaignName + &apos;\&apos;,\&apos;&apos; + this.dateCreated + &apos;\&apos;,\&apos;&apos; + this.userEmail + &apos;\&apos;,\&apos;&apos; + this.mailchimpList + &apos;\&apos;,\&apos;&apos; + this.campaign_segmentation + &apos;\&apos;,\&apos;&apos; + this.subscriberActivity + &apos;\&apos;);&quot;&gt;Start&lt;/button&gt;&apos; +
+		&apos;&lt;/div&gt;&lt;/div&gt;&apos;;
+		
+		dialog += &apos;&lt;/div&gt;&lt;div id=&quot;CS_progress&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CS_errormessage&quot;&gt;&lt;a href=&quot;http://chimpsync.com/support/#sync&quot; target=&quot;blank&quot;&gt;&lt;b&gt;How to Sync?&lt;/b&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&apos;;
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+        var dialogoverlay = document.getElementById(&apos;dialogoverlay&apos;);
+        var dialogbox = document.getElementById(&apos;dialogbox&apos;);
+        dialogoverlay.style.display = &quot;block&quot;;
+        dialogoverlay.style.height = winH+&quot;px&quot;;
+        dialogbox.style.left = (winW/2) - (425 * .5)+&quot;px&quot;;
+        dialogbox.style.top = &quot;100px&quot;;
+		dialogbox.style.display = &quot;block&quot;;
+        document.getElementById(&apos;dialogboxbody&apos;).innerHTML = dialog;    
+    },
+	styleHTML: &apos;.CS_icon,.CS_text{float:left}#CS_info,.CS_errormessage_email{font-weight:700}#CS_progress{width:31px;margin:10px auto}&apos;+
+	&apos;.CS_icon_box{width:64px;height:85px;float:left}.CS_text{width:190px}#CS_message{margin-top:20px}.CS_plan,.cs_choice{margin:3px 0}&apos;+
+	&apos;.CS_errormessage{font-size:13px;border-top:1px solid #d3d3d3;padding-top:10px;text-align:center}.cs_choice{display:inline-block}.CS_clear{clear:both}&apos;+
+	&apos;.CS_new_version.CS_css{border-top:1px solid #d3d3d3;margin-bottom:12px;color:green;font-weight:700;border-bottom:1px solid #d3d3d3;margin-top:-15px;padding:6px 0}&apos;+
+	&apos;#dialogoverlay{ 	display: none; 	opacity: .2; background-color:black;	position: fixed; 	top: 0px; 	left: 0px; 	width: 100%; 	&apos;+
+	&apos;z-index: 9999; } #dialogbox{ 	display: none; 	position: fixed; 	background: white; 	border-radius:7px;  	width:425px; 	z-index: 9999; &apos;+
+	&apos;+background-color: #fff; -webkit-background-clip: padding-box; background-clip: padding-box; border: 1px solid #999; border: 1px solid rgba(0,0,0,.2); &apos;+
+	&apos;border-radius: 6px; outline: 0; -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5); box-shadow: 0 3px 9px rgba(0,0,0,.5); }&apos;,
+
+	initialHTML : &apos;&lt;div id=&quot;dialog&quot;&gt;&lt;div id=&quot;dialogoverlay&quot;&gt;&lt;/div&gt;&lt;div id=&quot;dialogbox&quot;&gt;&lt;div id=&quot;dialogboxbody&quot; style=&quot;padding:20px;&quot;&gt;&lt;/div&gt;&apos;+
+	&apos;&lt;/div&gt;&lt;/div&gt;&apos;
+	,
+	createCampaignHTML: &apos;&lt;span class=&quot;cs_choice&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;sync_type&quot; value=&quot;new&quot; id=&quot;new_cs&quot;&gt;&lt;label for=&quot;new_cs&quot;&gt;&lt;b&gt;Create new campaign&lt;/b&gt; in MailChimp&lt;/label&gt;&lt;/span&gt;&lt;br /&gt;&apos;,
+	updateCampaignHTML : &apos;&lt;span class=&quot;cs_choice&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;sync_type&quot; value=&quot;update&quot; id=&quot;update_cs&quot;&gt;&lt;label for=&quot;update_cs&quot;&gt;&lt;b&gt;Update members&lt;/b&gt; on MailChimp campaign&lt;/label&gt;&lt;/span&gt;&lt;br/&gt;&apos;,
+	syncReportsHTML :&apos;&lt;span class=&quot;cs_choice&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;sync_type&quot; value=&quot;update_reports&quot; id=&quot;update_all_cs&quot;&gt;&lt;label for=&quot;update_all_cs&quot;&gt;Sync &lt;b&gt;campaign reports&lt;/b&gt;&lt;/label&gt;&lt;/span&gt;&apos;
+
+}
+
+
+var bodyElement = document.getElementsByTagName(&quot;BODY&quot;)[0];
+bodyElement.insertAdjacentHTML(&apos;beforeend&apos;, ChimpSyncBox.initialHTML );
+
+var startTimeout = false;
+ChimpSyncBox.render();</url>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewAllCampaignMembers</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>500</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View All Campaign Members</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/camp/rptcmpgncalldown.jsp?scope=1&amp;scopeid={!Campaign_Name}</url>
+        <width>500</width>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewCampaignInfluenceReport</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>500</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View Campaign Influence Report</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/00O?rt=117&amp;break0=CAN&amp;scope=1&amp;scopeid_lkid={!Campaign.Id}&amp;scopeid={!Campaign_Name}&amp;c=CAN&amp;c=MR&amp;c=PCS&amp;c=CFN&amp;c=RN&amp;c=ON&amp;c=OA&amp;c=OS&amp;c=OCD&amp;c=AN&amp;s=OA&amp;duel0=CAN%2CMR%2CCFN%2CRN%2CAN%2CON%2CPCS%2COS%2COCD%2COA&amp;details=yes&amp;format=t</url>
+        <width>500</width>
+    </webLinks>
+</CustomObject>

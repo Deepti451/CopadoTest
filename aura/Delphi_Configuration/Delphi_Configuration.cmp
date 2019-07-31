@@ -1,0 +1,165 @@
+<aura:component controller="DelphiController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="manualSelect" type="Boolean" default="none" description="Stores which radio button is selected"/>
+    <aura:attribute name="fieldListToShowOpportunity" type="List" default="[]" description="Stores the list of Opportunity fields to choose from"/>
+    <aura:attribute name="selectedFieldListOpportunity" type="List" default="[]" description="Stores the list of selected opportunity fields"/>
+    <aura:attribute name="fieldListToShowAccount" type="List" default="[]" description="Stores the list of Account fields to choose from"/>
+    <aura:attribute name="selectedFieldListAccount" type="List" default="[]" description="Stores the list of selected Account fields"/>
+    <aura:attribute name="fieldListToShowUser" type="List" default="[]" description="Stores the list of User fields to choose from"/>
+    <aura:attribute name="selectedFieldListUser" type="List" default="[]" description="Stores the list of selected User fields"/>
+    <aura:attribute name="configJson" type="Delphi_Configuration__c"  description="Stores the json of delphi configuration"/>
+    <aura:attribute name="modelOppCount" type="Integer" description="Count of closed won opportunities"/>
+    <aura:attribute name="predOppCount" type="Integer" description="Count of closed won opportunities"/>
+    <aura:attribute name="disablePredBtn" type="Boolean" default="false"/>
+    <aura:attribute name="objectType" type="String" default="Opportunity"/>
+    <aura:attribute name="intervalId" type="Integer"/>
+  
+    <aura:attribute name="test" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:tabset selectedTabId="{!v.test}" >
+    	<lightning:tab label="Model Learning" id="modelLearning">
+    		<div class="slds-box ">
+     			<div class="slds-grid slds-wrap">
+            		<div class="slds-col slds-size_12-of-12 slds-box step-header" >
+                         Model Learning
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap slds-box ">
+                    <div class="slds-col slds-size_6-of-12">
+                    	<lightning:input  type="radio" checked="{!v.manualSelect==false}" onclick="{!c.checkRadio}" label="Choose fields automatically" name="radioAuto"/>
+                    <div style="font-size:12px; padding-left: 24px;">
+                        <p>This will automatically create a forecasting model based on Standard/Custom (Account,User,Opportunity) field data. </p>
+                   </div>
+                        </div>
+                    <div class="slds-col slds-size_6-of-12">
+                      <lightning:input  type="radio" checked="{!v.manualSelect}" value="{!v.manualSelect}" onclick="{!c.checkRadio}" label="Choose fields manually" name="radioMan"/>
+                  <div style="font-size:12px;padding-left: 24px;">
+                      <p>This will manually create a forecasting model based on Standard/Custom (Account,User,Opportunity) field data. </p>
+                  </div>
+                        </div>
+                    
+                </div>
+                	
+           			<aura:if isTrue="{!v.manualSelect}">
+                        
+                <div class="slds-grid slds-wrap slds-box ">
+                    
+                  <div class="slds-col slds-size_6-of-12">
+                    <div style="width:38%"  >
+                    <lightning:select label="Select an object:" value="{!v.objectType}" >
+                       	<option value="Account">Account</option>
+                        <option value="Opportunity">Opportunity</option>
+                        <option value="User">User</option>
+                    </lightning:select>
+                    </div><br/><br/>
+                       <aura:if isTrue="{!v.objectType=='Opportunity'}">
+                    <lightning:dualListbox aura:id="selectFld"
+                    	name="Fields"
+                        label="Select Opportunity fields:"
+                        sourceLabel="Available Fields"
+                        selectedLabel="Selected Fields"
+                        options="{!v.fieldListToShowOpportunity}"
+                        value="{!v.selectedFieldListOpportunity}"/>
+                        </aura:if>
+                     <aura:if isTrue="{!v.objectType=='Account'}">
+                	<lightning:dualListbox aura:id="selectFld"
+                    	name="Fields"
+                        label="Select Account fields:"
+                        sourceLabel="Available Fields"
+                        selectedLabel="Selected Fields"
+                        options="{!v.fieldListToShowAccount}"
+                        value="{!v.selectedFieldListAccount}"/>
+                        </aura:if>
+                     <aura:if isTrue="{!v.objectType=='User'}">
+                	<lightning:dualListbox aura:id="selectFld"
+                    	name="Fields"
+                        label="Select User fields:"
+                        sourceLabel="Available Fields"
+                        selectedLabel="Selected Fields"
+                        options="{!v.fieldListToShowUser}"
+                        value="{!v.selectedFieldListUser}"/>
+                        </aura:if>
+                      
+                        </div>
+                    <div class="slds-col slds-size_6-of-12">
+                    	<table class="slds-table slds-table_cell-buffer slds-table_bordered opp-table">
+                            <thead>
+								<tr class="slds-line-height_reset">
+                                  <th style="width: 10%;" class="slds-text-title_caps" scope="col">Object</th>
+                                  <th class="slds-text-title_caps" scope="col">Selected Field Count</th>
+                              	</tr>
+                            </thead>
+                            <tbody>
+        						<tr>
+                                	<td>Account</td>
+                                    <td>{!v.selectedFieldListAccount.length}</td>
+                                </tr>
+                                <tr>
+                                	<td>Opportunity</td>
+                                    <td>{!v.selectedFieldListOpportunity.length}</td>
+                                </tr>
+                                <tr>
+                                	<td>User</td>
+                                    <td>{!v.selectedFieldListUser.length}</td>
+                                </tr>
+                            </tbody>
+  						</table>
+                    </div>
+                        </div>
+                    
+              
+                </aura:if>
+          <div class="slds-grid slds-wrap slds-box ">
+              <div class="slds-col slds-size_4-of-12">
+			
+                <lightning:button disabled="{!v.configJson.Model_Status__c=='Running' || v.configJson.Prediction_Status__c=='Running'}" variant="brand" name="btn" label="Train the Model" onclick="{!c.startModelLearning}"/>
+              
+            </div>
+              <div class="slds-col slds-size_4-of-12">
+              	<p><strong>Learning Type:</strong> {!v.configJson.Configuration_Type__c}</p>
+                <p><strong>Status:</strong> {!v.configJson.Model_Status__c}</p>
+              </div>
+              <div class="slds-col slds-size_4-of-12">
+                <p><strong>Last Run:</strong> {!v.configJson.Last_Model_Run__c}</p>
+                <p><strong>New Closed Opportunities Since Last Run:</strong> {!v.modelOppCount}</p>
+              </div>
+       
+                </div>
+    </div>
+       </lightning:tab>
+        <lightning:tab label="Prediction" id="prediction">
+    <div class="slds-box">
+          <div class="slds-grid slds-wrap">
+       		<div class="slds-col slds-size_12-of-12 slds-box step-header">
+                Opportunity Prediction
+            </div>
+              <div style=" padding-bottom: 25px; padding-top: 25px;padding-left: 12px;">
+              <p> Priortize your open opportunities and map them to the right Sales Rep.
+                  </p>
+              </div>
+              
+              <div class="slds-col slds-size_12-of-12 slds-grid slds-wrap slds-box">
+                  <br/>
+                  <br/>
+                 <br/>
+              	<div class="slds-col slds-size_4-of-12">
+                  
+              <lightning:button disabled="{!v.disablePredBtn}" variant="brand" name="btn" label="Initiate Prediction" onclick="{!c.startPrediction}"/>
+                  </div>
+                  <div class="slds-col slds-size_4-of-12">
+                  	<p><strong>Status:</strong> {!v.configJson.Prediction_Status__c}</p>
+                <p><strong>Last Run:</strong> {!v.configJson.Last_Prediction_Run__c}</p>
+                  </div>
+                  <div class="slds-col slds-size_4-of-12">
+                  	<p><strong>New Opportunities Created Since Last Run:</strong> {!v.predOppCount}</p>
+                  </div>
+        </div>
+        </div>
+        
+    
+    
+   
+            </div>
+        
+       </lightning:tab>
+    </lightning:tabset>
+</aura:component>

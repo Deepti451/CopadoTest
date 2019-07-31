@@ -1,0 +1,129 @@
+<apex:page sidebar="false" docType="html-5.0" tabStyle="Schedule_Report__tab" standardController="ScheduleReports__Report_Scheduler_Setup__c" extensions="ScheduleReports.ReportSchedulerListView">
+<div class="innerContainerBg">
+<!-- Bootstrap -->
+<!-- Latest compiled and minified CSS -->
+<apex:stylesheet value="{!URLFOR($Resource.ScheduleReports__bootstrap_min)}"/>
+<!-- Optional theme -->
+<apex:stylesheet value="{!URLFOR($Resource.ScheduleReports__bootstrap_theme_min)}"/>
+<!-- Latest compiled and minified JavaScript-->
+<!--<apex:includeScript value="{!$Resource.bootstrap_min_js}"/>-->
+
+<!-- custom CSS -->
+<apex:stylesheet value="{!URLFOR($Resource.ScheduleReports__custom_css)}"/>
+<style type="text/css">
+.container-fluid{
+    font-family: "Open Sans";
+    width: 100%;
+    }
+.innerContainerBg{
+    background: transparent url('/resource/1449662848000/patternbg') repeat 0 0;
+    background-color: rgba(162, 255, 151, 0.44);
+}
+.container-fluid h1{
+    font-size: 31px;
+    font-weight: 500;
+    color: black;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+}
+.container-fluid h4{
+    font-size: 18px;
+    font-weight: 400;
+    color: #3c3c3c;
+    text-align: center;
+    display: block;
+}
+.container-fluid button{
+    font-size: 22px;
+    font-weight: 400;
+    font-family: "Open Sans";
+
+}
+.sm-logo{
+    width: 372px;
+    height: 133px;
+    margin: 0 auto;
+    margin-top: 69px;
+}
+.clear-bottom{
+    clear: both;
+    display: block;
+    margin-bottom: 7%;
+    margin-top: 2%;
+}
+/**********breadcrumb start here****************/
+.steps { 
+    list-style: none; 
+    overflow: hidden; 
+    width: 84.5%;
+    margin: 0 auto;
+}
+.steps li {
+    color: white;
+    text-decoration: none; 
+    padding: 10px 0 10px 25px;
+    background: brown;               
+    background: #2c7356; 
+    position: relative; 
+    display: block;
+    float: left;
+    margin-right: 7%;
+    width: 43%;
+    height: 98px;
+}
+.steps li:after { 
+    content: " "; 
+    display: block; 
+    width: 0; 
+    height: 0;
+    border-left: 30px solid #2c7356;
+    border-top: 50px solid transparent;         
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px; 
+    left: 100%;
+    z-index: 2; 
+}
+.step-title{
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+}
+.step-text{
+    font-size: 14px; 
+    display: block;
+    font-weight: 400;
+}
+/**********breadcrumb end here****************/
+</style>
+<div class="container">
+    <div class="container-fluid">
+        <div class="sm-logo"><apex:image url="{!$Resource.ScheduleReports__rslogo}" /></div>
+        <!--<h1>Report Scheduler</h1>--><br/>
+        <h4 style="font-weight:600;font-family:Open Sans;">This is an application that lets you send all your reports ( Standard or Custom ) to any user, contact or even external email addresses. You can schedule these deliveries as preferred in just a few steps. So lets get started!</h4>
+
+       <br/><br/>
+        <div class="row">
+            <ul class="steps">
+                <li>
+                     <span class="step-title"><strong>Step 1:&nbsp;</strong> Setup Report for Scheduling   </span>
+                     <span class="step-title"><strong>Step 2:&nbsp;</strong> Set Frequency for the Schedule   </span>
+                     <span class="step-title"><strong>Step 3:&nbsp;</strong> Set Email Template   </span>
+                </li>
+                <li>
+                    <span class="step-title"><strong>Step 4:&nbsp;</strong> Select Recipients   </span>
+                    <span class="step-title"><strong>Step 5:&nbsp;</strong> Enable Scheduler </span>
+                </li>
+            </ul>
+        </div><br/><br/>
+         <div class="row clear-bottom">
+            <apex:form style="text-align: center;">
+                <button type="button" class="btn-warning btn-lg" style="width: 195px;font-weight:900" onclick="window.location.replace('/apex/ReportScheduler')">Get Started</button>
+            </apex:form>
+        </div>
+    </div>
+</div>  
+</div>    
+</apex:page>

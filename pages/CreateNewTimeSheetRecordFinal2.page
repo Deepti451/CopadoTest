@@ -1,0 +1,276 @@
+<apex:page controller="CreateNewTimeSheetRecordFinalCls" showHeader="false" sidebar="false" standardStylesheets="true" cache="false">
+    <apex:form id="theform">
+    <div style="display:none;">
+        <apex:pagemessages id="msg"/>
+    </div>
+    <!--<apex:messages id="msg"/>-->
+    <html>
+
+    <head>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background:white;background-image: url("{!$Resource.timsheetBackimage}") !important;
+                background-repeat: repeat-x  repeat-y ;
+                overflow: hidden;
+            }
+            
+            .Container {
+                width:100%;
+               
+                margin: auto;
+            }
+            
+            .header {
+                width: 100%;
+                background: #1797C0;
+                height: 50px;
+            }
+            
+            .content {
+                width: 100%;
+                display: flex;
+                margin: 0px 15px 118px;
+            }
+            
+            h3 {
+               
+                color: #0099FF;
+                font-family: Arial;
+                font-size: 18px;
+                        
+            }
+            
+           p {
+                font-size: 13px;
+                padding-left:250px;
+                color:white;
+            }
+          
+         
+            
+            .table1 {
+                margin-top: 50px;
+                margin-left: 104px;
+                width: 40%;
+                float: left;
+            }
+            
+            .tableto {
+                margin-top: 80px;
+                float: left;
+                width: 40%;
+            }
+            .t1{ margin-top: 30px;
+              margin-left: 50px;}
+            
+            td {
+                padding: 10px 10px;
+                font-size: 15px;
+            }
+           .usrnme .tl td,.usrnme .tl td a{
+                color:white;
+                font-size: 15px;
+                font-weight:bold;
+            }
+            
+            input,
+            textarea {
+                -moz-border-radius: 10px;
+                border-radius: 5px;
+                padding: 5px;
+            }
+            
+            .footer {
+                width: 100%;
+                height: 50px;
+                background: ;
+            }
+            
+            .footer .myButton {
+                background-color: white;
+                -moz-border-radius: 28px;
+                -webkit-border-radius: 28px;
+                border-radius: 24px;
+                border: 1px solid #1797C0;
+                display: inline-block;
+                cursor: pointer;
+                color: #0099FF;
+                font-family: Arial;
+                font-size: 17px;
+                padding: 7px 31px;
+                margin-left: 515px;
+                margin-top: 7px;
+                text-decoration: none;
+               
+            }
+             .footer .myButt {
+                background-color: white;
+                -moz-border-radius: 28px;
+                -webkit-border-radius: 28px;
+                border-radius: 24px;
+                border: 1px solid #1797C0;
+                display: inline-block;
+                cursor: pointer;
+                color: #0099FF;
+                font-family: Arial;
+                font-size: 17px;
+                padding: 7px 31px;
+                margin-left: 10px;
+                margin-top: 7px;
+                text-decoration: none;
+               
+            }
+            
+            
+            .footer.myButton:hover {
+                background-color: #C0C0C0;
+                text-decoration: none;
+            }
+            
+            .footer.myButton:active {
+                position: relative;
+                top: 1px;
+            }
+             .footer1 {
+                     position:absolute;
+                     bottom:0;
+                     left:0;
+                     background-color:#1797C0;
+                     border-color:#269abc;
+                     height:50px;
+                     width:100%;
+           }
+           .usrnme{width:20%;float:right;}
+           .dateFormat{
+               display:none;
+           }
+            span.star{
+            color:red !important;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="Container">
+            <div class="header">
+            <apex:image id="theImage" value="{!$Resource.mirketalogo}" width="120" height="50"/>
+               <div class="usrnme">
+               <table class="tl">
+                  <tr><td>{!username }</td>
+                  <td> 
+                      <apex:commandLink value="Logout" reRender="theform" action="{!logoutpage}" immediate="true" style="text-decoration:none"/>
+                      <!--<a href="http://teestfb2-developer-edition.ap2.force.com/testfb2">Logout</a>-->
+                  </td>
+                   <td>
+                     <apex:commandLink reRender="theform" action="{!cancelRecord}"  immediate="true" >
+                       <apex:image id="theImage1" value="{!$Resource.HomeImage}"  width="50" height="40" />
+                     </apex:commandLink>
+                   </td>    
+                  </tr>
+               </table>
+              
+              
+               </div>
+          </div>
+
+            <div class="content">
+                          
+                <div class="table1">
+                    <!--<apex:form >-->
+                     <h3>Create Timesheet</h3>
+                        <table class="t1">
+                            <tr>
+                                <td>Date <span class="star">*</span></td>
+                                <td>
+                                    <apex:inputField value="{!ts.Date__c}" style="width: 169px;"/> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Project <span class="star">*</span></td>
+                                <td>
+                                    <apex:inputField value="{!ts.Project__c}"/> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ticket Number </td>
+                                <td>
+                                    <apex:inputField value="{!ts.Ticket_Number__c}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Epic </td>
+                                <td>
+                                    <apex:inputField value="{!ts.Epic__c}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="display:none">User </td>
+                                <td style="display:none">
+                                    <!--<apex:outputfield value="{!ts.User__c}"/>-->
+                                    {!username} 
+                                </td>
+                            </tr>
+                            <!--<tr>
+                                <td>UserName </td>
+                                <td>
+                                    <apex:inputtext /> </td>
+                            </tr>-->
+                        </table>
+                    <!--</apex:form>-->
+                </div>
+                <div class="tableto">
+                    <!--<apex:form >-->
+                        <table>
+                            <tr>
+                                <td>Task <span class="star">*</span></td>
+                                <td>
+                                    <apex:inputField value="{!ts.Task__c}" required="true" style="width: 169px;"/> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td>
+                                    <apex:inputField value="{!ts.Description__c}" style="width: 169px;"/> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Organisation <span class="star">*</span></td>
+                                <td>
+                                    <apex:inputField value="{!ts.Organisation__c}" required="true" style="width: 180px;height:27px;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Time Spend(Hours) <span class="star">*</span></td>
+                                <td>
+                                    <apex:inputField value="{!ts.Time_Spend__c}" style="width: 169px;"/> 
+                                </td>
+                            </tr>
+                        </table>
+                    <!--</apex:form>-->
+                </div>
+
+            </div>
+
+            <div class="footer">
+                <!--<apex:form >--> 
+                    <apex:commandButton styleClass="myButton" value="Save" action="{!saverecord}" reRender="theform,msg"/>
+                    <apex:commandButton value="Cancel" action="{!cancelRecord}" styleClass="myButt" immediate="true"/>
+                    <apex:commandButton value="Save & New" action="{!saveandnew}" reRender="theform,msg" styleClass="myButt"/>
+                <!--</apex:form>-->
+            </div>
+              <div class="footer1 " style="margin-bottom:0px;">
+         <p>Copyright © 2000-2015 salesforce.com, inc. All rights reserved. | Privacy Statement | Security Statement | Terms of Use | 508 Compliance</p>
+         </div>
+        </div>
+       
+    </body>
+
+    </html>
+    
+    <br/><br/><br/><br/><br/>
+    
+    </apex:form>
+    
+</apex:page>

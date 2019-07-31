@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>rajeev@mirketa.com</contactEmail>
+    <description>The Environment Hub lets you view, connect to, and access all your organizations from one location.</description>
+    <iconUrl>https://mirketainc.my.salesforce.com/environmenthub/images/connected_app_logo.png</iconUrl>
+    <label>Environment Hub</label>
+    <logoUrl>https://mirketainc.my.salesforce.com/environmenthub/images/connected_app_logo.png</logoUrl>
+    <oauthConfig>
+        <callbackUrl>https://mirketainc.my.salesforce.com/environmenthub/callback.apexp</callbackUrl>
+        <consumerKey>3MVG9FG3dvS828gL.pckzEFAegV1zEhsOOK6H3kwU7vcXqQ9JJTaZUCnN0RinF75ruB_8YXwx7BxYV4ZTq3Xt</consumerKey>
+        <scopes>Basic</scopes>
+        <scopes>Api</scopes>
+    </oauthConfig>
+</ConnectedApp>

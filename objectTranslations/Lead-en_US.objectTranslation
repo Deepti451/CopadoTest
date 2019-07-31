@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <label><!-- Lead Filter Fields --></label>
+        <name>MC4SF__Lead_Filter_Fields</name>
+    </fieldSets>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Designation</value>
+        </caseValues>
+        <name>title_lead</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <help><!-- Enter the date of first connect to lead --></help>
+        <label><!-- Date of First Connect --></label>
+        <name>Date_of_First_Connect__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date of Second Connect --></label>
+        <name>Date_of_Second_Connect__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date of Third Connect --></label>
+        <name>Date_of_Third_Connect__c</name>
+    </fields>
+    <fields>
+        <label><!-- Do Not Map --></label>
+        <name>FN__Do_Not_Map__c</name>
+    </fields>
+    <fields>
+        <label><!-- Find Nearby --></label>
+        <name>FN__Find_Nearby__c</name>
+    </fields>
+    <fields>
+        <label><!-- Latitude --></label>
+        <name>FN__Lat__c</name>
+    </fields>
+    <fields>
+        <label><!-- Longitude --></label>
+        <name>FN__Lon__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mapping Status --></label>
+        <name>FN__Mapping_Status__c</name>
+        <picklistValues>
+            <masterLabel>Located</masterLabel>
+            <translation><!-- Located --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Located Yet</masterLabel>
+            <translation><!-- Not Located Yet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Problem with Address</masterLabel>
+            <translation><!-- Problem with Address --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- FollowUp 1 --></label>
+        <name>FollowUp_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FollowUp 2 --></label>
+        <name>FollowUp_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Get Regular Updates from Mirketa? --></label>
+        <name>Get_Regular_Updates_from_Mirketa__c</name>
+    </fields>
+    <fields>
+        <label><!-- IP address Web to Lead --></label>
+        <name>IP_address_Web_to_Lead__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Replied Recieved? --></label>
+        <name>Is_Replied_Recieved__c</name>
+    </fields>
+    <fields>
+        <help><!-- Valid lead sourc id is 
+EDvF3EF1476518353EFA21B01674436736A2EsFDt2FF1476518352115G476518353239CEchFDp5f1B01674436736F2CC --></help>
+        <label><!-- Lead Source id --></label>
+        <name>Lead_Source_id__c</name>
+    </fields>
+    <fields>
+        <label><!-- MC Subscriber --></label>
+        <name>MC4SF__MC_Subscriber__c</name>
+        <relationshipLabel><!-- Leads --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Pitch Used --></label>
+        <name>Pitch_Used__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B</masterLabel>
+            <translation><!-- B --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Pitch --></label>
+        <name>Pitch__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the linkedin or Salesforce community Profile link. --></help>
+        <label><!-- Profile Link --></label>
+        <name>Profile_Link__c</name>
+    </fields>
+    <fields>
+        <label><!-- If Reply Received (Remarks) --></label>
+        <name>Reply_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- CorrelationID --></label>
+        <name>SFGA__CorrelationID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Correlation Data --></label>
+        <name>SFGA__Correlation_Data__c</name>
+    </fields>
+    <fields>
+        <label><!-- Web Source --></label>
+        <name>SFGA__Web_Source__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status For NewsLetter --></label>
+        <name>Status_For_NewsLetter__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Subscriber Org Type --></label>
+        <name>sfLma__Subscriber_Org_Type__c</name>
+    </fields>
+    <validationRules>
+        <errorMessage><!-- Lead Source id is empty,possible spam --></errorMessage>
+        <name>Lead_source_id_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Remarks is required if is reply checked. --></errorMessage>
+        <name>Remarks_is_required_if_is_reply_checked</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Spam lead --></errorMessage>
+        <name>Spam_leads</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- AltavistaNews --></label>
+        <name>AltavistaNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Map_Leads --></label>
+        <name>FN__Map_Leads</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleNews --></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- HooversProfile --></label>
+        <name>HooversProfile</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- MailChimp_Subscriptions_detail --></label>
+        <name>MC4SF__MailChimp_Subscriptions_detail</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- MailChimp_Subscriptions_list --></label>
+        <name>MC4SF__MailChimp_Subscriptions_list</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- SendGmail --></label>
+        <name>SendGmail</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooMaps --></label>
+        <name>YahooMaps</name>
+    </webLinks>
+</CustomObjectTranslation>

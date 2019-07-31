@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPageWebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <availability>online</availability>
+    <description>This will take you to the contact Mr. Mark Kingston*.  Once on his record you can login to the portal via the &quot;Work with Portal&quot; button on the page.</description>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Customer Portal User</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/003d000000jXuY3</url>
+</CustomPageWebLink>

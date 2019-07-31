@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Delphi Configuration</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Dephi Configurations</value>
+    </caseValues>
+    <fields>
+        <label><!-- Base URL --></label>
+        <name>Base_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Configuration Type --></label>
+        <name>Configuration_Type__c</name>
+        <picklistValues>
+            <masterLabel>Automatic</masterLabel>
+            <translation><!-- Automatic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manual</masterLabel>
+            <translation><!-- Manual --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Last Model Run --></label>
+        <name>Last_Model_Run__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Prediction Run --></label>
+        <name>Last_Prediction_Run__c</name>
+    </fields>
+    <fields>
+        <label><!-- Model Status --></label>
+        <name>Model_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prediction Status --></label>
+        <name>Prediction_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- RFE Fields --></label>
+        <name>RFE_Fields__c</name>
+    </fields>
+    <fields>
+        <label><!-- Selected Field Account --></label>
+        <name>Selected_Field_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Selected Field User --></label>
+        <name>Selected_Field_User__c</name>
+    </fields>
+    <fields>
+        <label><!-- Selected Fields --></label>
+        <name>Selected_Fields__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time Prediction Status --></label>
+        <name>Time_Prediction_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- urlb --></label>
+        <name>urlb__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

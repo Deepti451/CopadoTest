@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntitlementProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <SObjectType>Case</SObjectType>
+    <active>true</active>
+    <description>Testing Entitlment process</description>
+    <entryStartDateField>Case.CreatedDate</entryStartDateField>
+    <exitCriteriaFilterItems>
+        <field>Case.IsClosed</field>
+        <operation>equals</operation>
+        <value>true</value>
+    </exitCriteriaFilterItems>
+    <milestones>
+        <milestoneCriteriaFilterItems>
+            <field>Case.BusinessHoursId</field>
+            <operation>equals</operation>
+            <value>Default</value>
+        </milestoneCriteriaFilterItems>
+        <milestoneName>Respond to customer</milestoneName>
+        <minutesToComplete>45</minutesToComplete>
+        <timeTriggers>
+            <timeLength>-10</timeLength>
+            <workflowTimeTriggerUnit>Minutes</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <useCriteriaStartTime>false</useCriteriaStartTime>
+    </milestones>
+    <milestones>
+        <milestoneCriteriaFilterItems>
+            <field>Case.BusinessHoursId</field>
+            <operation>equals</operation>
+            <value>Default</value>
+        </milestoneCriteriaFilterItems>
+        <milestoneName>Resolve Issue</milestoneName>
+        <minutesToComplete>650</minutesToComplete>
+        <useCriteriaStartTime>false</useCriteriaStartTime>
+    </milestones>
+    <milestones>
+        <milestoneCriteriaFilterItems>
+            <field>Case.BusinessHoursId</field>
+            <operation>equals</operation>
+            <value>Default</value>
+        </milestoneCriteriaFilterItems>
+        <milestoneName>Send final confirmationa</milestoneName>
+        <minutesToComplete>45</minutesToComplete>
+        <useCriteriaStartTime>true</useCriteriaStartTime>
+    </milestones>
+</EntitlementProcess>

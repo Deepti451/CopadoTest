@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Fields --></label>
+        <name>advitya__Fields__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object --></label>
+        <name>advitya__Object__c</name>
+    </fields>
+    <fields>
+        <label><!-- UserName --></label>
+        <name>advitya__UserName__c</name>
+    </fields>
+</CustomObjectTranslation>

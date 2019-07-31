@@ -1,0 +1,13 @@
+Hi, 
+
+See the details of Lead below 
+{!Lead.Name} 
+Phone : {!Lead.Phone} 
+Mobile : {!Lead.MobilePhone} 
+Email : {!Lead.Email} 
+Lead Source : {!Lead.LeadSource} 
+Link : {!Lead.Link} 
+Comment : {!Contact.Description} 
+Lead Source id : {!Lead.Lead_Source_id__c} 
+Thanks & Regards, 
+Mirketa Support Team

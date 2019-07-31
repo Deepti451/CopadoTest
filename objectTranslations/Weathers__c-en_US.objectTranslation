@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Weathers</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Weathers</value>
+    </caseValues>
+    <fields>
+        <label><!-- Air Speed --></label>
+        <name>Air_Speed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Humidity --></label>
+        <name>Humidity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max Temperature --></label>
+        <name>Max_Temperature__c</name>
+    </fields>
+    <fields>
+        <label><!-- Min/Max Temperature --></label>
+        <name>Min_Max_Temperature__c</name>
+    </fields>
+    <fields>
+        <label><!-- Min Temperature --></label>
+        <name>Min_Temperature__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pressure(hPa) --></label>
+        <name>Pressure_hPa__c</name>
+    </fields>
+    <fields>
+        <label><!-- Temperature --></label>
+        <name>Temperature__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time --></label>
+        <name>Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Weather --></label>
+        <name>Weather_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Weather --></label>
+        <name>Weather__c</name>
+        <relationshipLabel><!-- Weathers --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

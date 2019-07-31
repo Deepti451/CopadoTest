@@ -1,0 +1,133 @@
+<apex:page standardcontroller="Contact" extensions="ChimpSync.CS_mcactivity_controller" tabStyle="ChimpSync_Settings__tab" action="{!subscriberActivity}" sidebar="false" >
+    <style type="text/css">
+  .tg{border-collapse:collapse;border-spacing:0;border-color:#ccc}.tg td{font-family:Arial,sans-serif;font-size:13px;padding:3px 0;border-style:solid;border-width:0;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px}.tg th{font-family:Arial,sans-serif;font-size:13px;font-weight:400;padding:3px 0;border-style:solid;border-width:0;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;border-top-width:1px;border-bottom-width:1px}.tg .tg-s6z2{text-align:center;overflow:hidden}.chimpsync_campaign{color:#4a4a56;font-size:82%;font-family:Arial,Helvetica,sans-serif;font-weight:700}th.tg-031e{text-decoration:underline}.tg-051e{color:#00f!important}.tg-051e span:hover{text-decoration:underline;cursor:pointer}.tg-031ee{min-width:200px;max-width:300px}.tg_fixed .tg-s6z2,.tg_fixed td,.tg_fixed th{width:110px}.chimpsync_help{padding:10px 0}.chimpsync_help a{font-weight:700}
+</style>
+    <script>
+function Chimpsync_showDetails(id){
+    if(document.getElementById(id).style.display == 'none'){
+        document.getElementById(id).style.display = 'block';
+    }else{
+        document.getElementById(id).style.display = 'none';
+    }    
+}
+</script>
+    <apex:form id="form">
+        <apex:outputPanel rendered="{!empty}">
+            <apex:pageBlock title="Subscriber Activity">
+                <h2>No subscriber activity.</h2>
+            </apex:pageblock>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!NOT(empty)}">
+            <apex:outputPanel rendered="{!IF(NOT(ISBLANK(error)),false,true)}">
+                <apex:pageBlock rendered="{!IF(NOT(ISBLANK(blank)),true,false)}" title="Subscriber Activity">
+                    <table class="tg tg_fixed" style="min-width:100%;">
+                        <tr>
+                            <th class="tg-031ee"></th>
+                            <th class="tg-s6z2">Date sent</th>
+                            <th class="tg-s6z2">Sent</th>
+                            <th class="tg-s6z2">Open</th>
+                            <th class="tg-s6z2">Click</th>
+                            <th class="tg-s6z2">Bounce</th>
+                            <th class="tg-s6z2">Unsubscribe</th>
+                            <th class="tg-s6z2"></th>
+                            <!--<th class="tg-s6z2">unsub contact</th>-->
+                        </tr>
+                    </table>
+                    <apex:repeat value="{!activity}" var="outer_key">
+                        <!--
+                        <div title="titlex" style="background-color: #00a3d1; color:#FFFFFF; padding-top: 4px; padding-right: 3px; padding-bottom: 4px; padding-left: 3px;font-size: 1.1em;" class="pbSubheader brandTertiaryBgr first tertiaryPalette"> 
+                            <h3>{!listNames[outer_key]} </h3>
+                        </div>
+                        -->
+                        <div class="pbSubheader brandTertiaryBgr first tertiaryPalette" style="margin-bottom:4px;">
+                            <h3>{!listNames[outer_key]} </h3>
+
+                         
+                            -->
+                        </div>
+                        <!--
+                        <apex:pageblockSection title="{!listNames[outer_key]}"  collapsible="false">
+                            
+                        </apex:pageblockSection>
+                        --> 
+                        <!--<div>{!outer_key}</div>-->
+                        <div style="margin-bottom:3px;">
+                            <apex:outputpanel layout="none" rendered="{!IF(activity[outer_key]['empty'].size=0,true,false)}" style="margin-bottom:5px;">No campaigns.</apex:outputpanel>
+                        </div>
+                        <apex:repeat value="{!mapSort[outer_key]}" var="inner_key">
+                            <apex:outputpanel layout="none" rendered="{!IF(inner_key!='empty',true,false)}">
+                                <table class="tg tg_fixed" style="min-width:100%;">
+                                    <tr>
+                                        <td class="tg-031ee">
+                                            <div class="chimpsync_campaign" id="name_{!inner_key}">
+                                                <b>
+                                                    <apex:commandLink action="{!campaignEmail}" target="_blank">
+                                                        <apex:param name="p1" value="{!inner_key.cmpgID}" assignTo="{!campaign_id}"/>
+                                                            {!activity[outer_key][inner_key.cmpgID].activity[0].campaign_name}
+                                                    </apex:commandLink>
+                                                </b>
+                                            </div>
+                                        </td>
+                                        <td class="tg-s6z2">{!activity[outer_key][inner_key.cmpgID].summary.date_sent}</td>
+                                        <td class="tg-s6z2">
+                                            <apex:image value="{!IF(activity[outer_key][inner_key.cmpgID].summary.sent,'/img/checkbox_checked.gif','/img/checkbox_unchecked.gif')}" title="Sent"/>
+                                        </td>
+                                        <td class="tg-s6z2">
+                                            <apex:image value="{!IF(activity[outer_key][inner_key.cmpgID].summary.opened,'/img/checkbox_checked.gif','/img/checkbox_unchecked.gif')}" title="Open"/>
+                                        </td>
+                                        <td class="tg-s6z2">
+                                            <apex:image value="{!IF(activity[outer_key][inner_key.cmpgID].summary.clicked,'/img/checkbox_checked.gif','/img/checkbox_unchecked.gif')}" title="Click"/>
+                                        </td>
+                                        <td class="tg-s6z2">
+                                            <apex:image value="{!IF(activity[outer_key][inner_key.cmpgID].summary.bounced,'/img/checkbox_checked.gif','/img/checkbox_unchecked.gif')}" title="Bounce"/>
+                                        </td>
+                                        <td class="tg-s6z2">
+                                            <apex:image value="{!IF(activity[outer_key][inner_key.cmpgID].summary.unsubscribed,'/img/checkbox_checked.gif','/img/checkbox_unchecked.gif')}" title="Unsubscribe"/>
+                                        </td>
+                                        <td class="tg-051e">
+                                            <a href="#" onclick="Chimpsync_showDetails('{!inner_key.cmpgID}');return false;">details</a>
+                                        </td>
+                                        <!--<td class="tg-s6z2"></td>-->
+                                    </tr>
+                                </table>
+                                <table class="tg" id="{!inner_key.cmpgID}" style="min-width:100%;display:none;border: 1px solid gray;margin-top: 11px;">
+                                    <tr>
+                                        <th class="tg-031e" style="width:35%;padding-left: 10px;">action</th>
+                                        <th class="tg-031e" style="width:35%;">time</th>
+                                        <th class="tg-031e" style="width:30%;">url</th>
+                                        <th class="tg-031e"></th>
+                                    </tr>
+                                    <apex:repeat value="{!activity[outer_key][inner_key.cmpgID].activity}" var="data">
+                                        <div>
+                                            <tr>
+                                                <td class="tg-031e" style="padding-left: 10px;">{!data.action} 
+                                                    <apex:outputpanel layout="none" rendered="{!IF(data.action='bounce',true,false)}"> - {!data.type}</apex:outputpanel>
+                                                </td>
+                                                <td class="tg-031e">{!data.timestamp}</td>
+                                                <td class="tg-031e">{!data.url}</td>
+                                                <td class="tg-031e"></td>
+                                            </tr>
+                                        </div>
+                                    </apex:repeat>
+                                </table>
+                            </apex:outputpanel>
+                        </apex:repeat>
+                    </apex:repeat>
+                </apex:pageBlock>
+                <apex:commandButton action="{!subscriberActivity}" value="Refresh"/>
+            </apex:outputPanel>
+            <apex:actionFunction name="lnkClicked" action="{!campaignEmail}" reRender="none">
+                <apex:param name="p1" assignTo="{!campaign_id}" value=""/>
+            </apex:actionFunction>
+        </apex:outputPanel>
+    </apex:form>
+    <apex:pageblock rendered="{!IF(NOT(ISBLANK(error)),true,false)}"  title="Subscriber Activity" >
+        <apex:outputText escape="false" value="{!errorMap[error]}" />
+        <apex:outputPanel layout="block" rendered="{!IF(error='103',true,false)}" style="overflow:hidden;">
+            <apex:image value="{!URLFOR($Resource.ChimpSync__FancyboxIM,'subscriber_activity.png')}" style="margin-top:10px;"/>
+        </apex:outputPanel>
+        <div class="chimpsync_help">Please contact us for help: 
+            <a href="mailto:support@chimpsync.com">support@chimpsync.com</a>
+        </div>
+    </apex:pageblock>
+</apex:page>

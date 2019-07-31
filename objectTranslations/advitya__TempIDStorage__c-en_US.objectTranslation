@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- ListOfIds --></label>
+        <name>advitya__ListOfIds__c</name>
+    </fields>
+    <fields>
+        <label><!-- QueryName --></label>
+        <name>advitya__QueryName__c</name>
+    </fields>
+    <fields>
+        <label><!-- TotalCount --></label>
+        <name>advitya__TotalCount__c</name>
+    </fields>
+    <fields>
+        <label><!-- UserName --></label>
+        <name>advitya__UserName__c</name>
+    </fields>
+</CustomObjectTranslation>

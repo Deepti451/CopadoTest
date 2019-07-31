@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntitlementTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <businessHours>Default</businessHours>
+    <casesPerEntitlement>1</casesPerEntitlement>
+    <entitlementProcess>EntitlementProcess</entitlementProcess>
+    <isPerIncident>true</isPerIncident>
+    <term>2</term>
+    <type>Phone Support</type>
+</EntitlementTemplate>

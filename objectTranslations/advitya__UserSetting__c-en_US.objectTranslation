@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Batch Job ID --></label>
+        <name>advitya__Batch_Job_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- currentQuery --></label>
+        <name>advitya__currentQuery__c</name>
+    </fields>
+    <fields>
+        <label><!-- masterCount --></label>
+        <name>advitya__masterCount__c</name>
+    </fields>
+    <fields>
+        <label><!-- userJson --></label>
+        <name>advitya__userJson__c</name>
+    </fields>
+</CustomObjectTranslation>

@@ -1,0 +1,91 @@
+<apex:page controller="Weather" showHeader="false" sidebar="false" renderAs="pdf">
+    <body>
+        <center>
+             <h1>
+                 <apex:image style="float: left;" value="{!$Resource.Weather}" />
+                 <div style="vertical-align: middle;font-size: 50px;margin-left: 80px;"><apex:outputText value="Weather Histories"/></div>
+             </h1>
+        </center>     
+             <br/>
+             <apex:pageBlock title="Place & Date Information">
+                <apex:pageBlockSection columns="1" >
+                    <apex:pageblockSectionItem >
+                         <apex:outputLabel value="City Name: "/>
+                         <apex:outputText value="{!weatherHistory.City_Name__c}" />
+                    </apex:pageblockSectionItem>
+                
+                    <apex:pageblockSectionItem >
+                         <apex:outputLabel value="Start Date: "/>
+                         <apex:outputText value="{0,date,M/d/yyyy hh:mm a}">
+                            <apex:param value="{!weatherHistory.Start_Date__c}"/>
+                         </apex:outputText>  
+                    </apex:pageblockSectionItem>
+                
+                    <apex:pageblockSectionItem >
+                          <apex:outputLabel value="End Date: "/>
+                          <apex:outputText value="{0,date,M/d/yyyy hh:mm a}">
+                               <apex:param value="{!weatherHistory.End_Date__c}"/>
+                          </apex:outputText> 
+                    </apex:pageblockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+            <br/>
+        <center>   
+            <apex:panelGrid columns="1" width="100%">
+                <table cellspacing="10" width="100%">
+                    <tr width="100%">
+                        <th>Time</th>
+                        <th>Weather</th>
+                        <th>Temperature</th>
+                        <th>Min/Max Temperature</th>
+                        <th>Pressure(hPa)</th>
+                        <th>Air Speed</th>
+                        <th>Humidity</th>
+                    </tr>
+                    <apex:repeat value="{!AWeathersList}" var="Weather">
+                          <tr width="100%">
+                                <td width="15%">
+                                    <apex:outputText value="{0,date,M/d/yyyy hh:mm a}">
+                                           <apex:param value="{!Weather.Dtime}"/>
+                                    </apex:outputText>       
+                                </td>
+                                   
+                                <td width="45%">
+                                       <apex:image style="vertical-align: middle;" url="http://api.openweathermap.org/img/w/{!Weather.weatherIcon }.png" width="50" height="50" />{!Weather.weatherDescription}
+                                </td>
+                                <td width="8%">
+                                       <apex:outputText value="{0, number, ###.0}°C">
+                                           <apex:param value="{!Weather.temperature}"/>
+                                       </apex:outputText>    
+                                </td>
+                                <td width="10%">
+                                       <apex:outputText value="{0, number, ###.0}">
+                                            <apex:param value="{!Weather.minTemp}"/>
+                                       </apex:outputText>
+                                       <apex:outputText value="/{0, number, ###.0}">
+                                            <apex:param value="{!Weather.maxTemp}"/>
+                                       </apex:outputText>  
+                                </td>
+                                <td width="8%">
+                                       <apex:outputText value="{0, number, ###.0}">
+                                           <apex:param value="{!Weather.pressure}"/>
+                                       </apex:outputText> 
+                                </td>
+                                <td width="7%">
+                                       <apex:outputText value="{0, number, ###.0}">
+                                           <apex:param value="{!Weather.airSpeed}"/>
+                                       </apex:outputText> 
+                                </td>
+                                <td width="8%">
+                                       <apex:outputText value="{0, number, ###.0}%">
+                                           <apex:param value="{!Weather.humidity}"/>
+                                       </apex:outputText>    
+                               </td>
+                        </tr>           
+                    </apex:repeat>
+               </table>  
+           </apex:panelGrid>
+        </center>
+    </body>
+
+</apex:page>

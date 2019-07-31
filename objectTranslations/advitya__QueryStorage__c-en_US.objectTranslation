@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Created Date --></label>
+        <name>advitya__Created_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Criteria Field Label --></label>
+        <name>advitya__Criteria_Field_Label__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cron --></label>
+        <name>advitya__Cron__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>advitya__Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Formula Time Remain --></label>
+        <name>advitya__Formula_Time_Remain__c</name>
+    </fields>
+    <fields>
+        <label><!-- JobID --></label>
+        <name>advitya__JobID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last modified date --></label>
+        <name>advitya__Last_modified_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Next Schedule Run time --></label>
+        <name>advitya__Next_Schedule_Run_time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object label --></label>
+        <name>advitya__Object_label__c</name>
+    </fields>
+    <fields>
+        <label><!-- Occurence --></label>
+        <name>advitya__Occurence__c</name>
+    </fields>
+    <fields>
+        <label><!-- Query --></label>
+        <name>advitya__Query__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time Remain --></label>
+        <name>advitya__Time_Remain__c</name>
+    </fields>
+    <fields>
+        <label><!-- addonFieldLabel --></label>
+        <name>advitya__addonFieldLabel__c</name>
+    </fields>
+    <fields>
+        <label><!-- addonFields --></label>
+        <name>advitya__addonFields__c</name>
+    </fields>
+    <fields>
+        <label><!-- isValued --></label>
+        <name>advitya__isValued__c</name>
+    </fields>
+    <fields>
+        <label><!-- masterField --></label>
+        <name>advitya__masterField__c</name>
+    </fields>
+    <fields>
+        <label><!-- masterValue --></label>
+        <name>advitya__masterValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- qCriteria --></label>
+        <name>advitya__qCriteria__c</name>
+    </fields>
+    <fields>
+        <label><!-- qObject --></label>
+        <name>advitya__qObject__c</name>
+    </fields>
+</CustomObjectTranslation>

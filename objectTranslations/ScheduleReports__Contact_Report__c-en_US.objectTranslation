@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Contact --></label>
+        <name>ScheduleReports__Contact__c</name>
+        <relationshipLabel><!-- Contact Report --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Email ID --></label>
+        <name>ScheduleReports__Email_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Recipient Email --></label>
+        <name>ScheduleReports__External_Recipient_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Recipient Name --></label>
+        <name>ScheduleReports__External_Recipient_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job ID --></label>
+        <name>ScheduleReports__Job_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job Name --></label>
+        <name>ScheduleReports__Job_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recipient Name --></label>
+        <name>ScheduleReports__Recipient_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Report Name --></label>
+        <name>ScheduleReports__Report_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Report Scheduler Setup --></label>
+        <name>ScheduleReports__Report_Scheduler_Setup__c</name>
+        <relationshipLabel><!-- Contact Report --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- User --></label>
+        <name>ScheduleReports__User__c</name>
+        <relationshipLabel><!-- Contact Report --></relationshipLabel>
+    </fields>
+</CustomObjectTranslation>

@@ -1,0 +1,11 @@
+Dear  {!Lead.LastName},<br/><br/>
+ Thank you for registering at mirketa.com.
+ 
+ Please click on the address given below to verify your email address and activate your mirketa.com.<br/>
+ 
+ <a href="http://timesheet.force.com?lid={!Lead.Id}">Click Here plz</a>
+<br/>
+ Please note that you have to verify your email in order to use your mirketa services.
+<br/><br/>
+ Best Regards,<br/>
+ mirketa.com

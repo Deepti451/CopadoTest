@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>resources present in the project such as project manager, developer, QA, BA etc.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>mirketappm__Designation__c</fullName>
+        <deprecated>false</deprecated>
+        <description>designation of the employee resource.</description>
+        <externalId>false</externalId>
+        <label>Designation</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Business Analyst</fullName>
+                    <default>false</default>
+                    <label>Business Analyst</label>
+                </value>
+                <value>
+                    <fullName>Java Developer</fullName>
+                    <default>false</default>
+                    <label>Java Developer</label>
+                </value>
+                <value>
+                    <fullName>Salesforce Developer</fullName>
+                    <default>false</default>
+                    <label>Salesforce Developer</label>
+                </value>
+                <value>
+                    <fullName>Senior Salesforce Developer</fullName>
+                    <default>false</default>
+                    <label>Senior Salesforce Developer</label>
+                </value>
+                <value>
+                    <fullName>Team Lead</fullName>
+                    <default>false</default>
+                    <label>Team Lead</label>
+                </value>
+                <value>
+                    <fullName>Tech Lead</fullName>
+                    <default>false</default>
+                    <label>Tech Lead</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>mirketappm__Employee_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Employee Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>mirketappm__Is_Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Is Active</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>mirketappm__Jira_User_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <description>stores the jira resource key.</description>
+        <externalId>false</externalId>
+        <label>Jira User Id</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>mirketappm__Jira_User_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>user name of the jira user</description>
+        <externalId>false</externalId>
+        <label>Jira User Name</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Resource</label>
+    <listViews>
+        <fullName>mirketappm__All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>mirketappm__Resource_List_View</fullName>
+        <columns>NAME</columns>
+        <columns>mirketappm__Designation__c</columns>
+        <columns>mirketappm__Employee_Code__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>mirketappm__Is_Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Resource List View</label>
+    </listViews>
+    <nameField>
+        <label>Resource Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Resources</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

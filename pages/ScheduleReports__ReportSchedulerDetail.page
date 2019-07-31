@@ -1,0 +1,309 @@
+<!--* Created By      : Ankur Saini - Mirketa Inc.
+ * Created Date    : 4/3/2017
+ * Created Purpose : Custom Detail Page of Report Scheduler.
+ * Page Name       : ReportSchedulerDetail-->
+<apex:page standardController="ScheduleReports__Report_Scheduler_Setup__c" extensions="ScheduleReports.ReportScheduler" sidebar="false" tabStyle="Schedule_Report__tab" docType="html-5.0" applyBodyTag="false">
+<apex:includeLightning />
+<script>
+window.onload = showLimitedDesc;
+function confirmDelete(){
+ if(confirm('Are you sure ?'))
+       myDelete();
+   } 
+   
+function confirmEnable(){
+ if(confirm('Are you sure you want to enable this scheduler ?'))
+       myEnable();
+   }
+   
+function confirmDisable(){
+ if(confirm('Are you sure you want to disable this scheduler ?'))
+       myDisable();
+   }  
+   
+</script>
+
+<html lang="en">
+<head>
+
+<apex:stylesheet value="{!URLFOR($Resource.ScheduleReports__bootstrap_min)}"/>
+<style type="text/css">
+    
+   .row {
+    margin-right: -9px;
+    margin-left: -9px;
+}   
+   
+/*****************steps css start here************/
+
+.select-object {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 300;
+}   
+
+/*****select drop down css endhere **********/
+.pagerNew li {
+    margin-right: 1em;
+    list-style: none;
+} 
+.pagerNewPrev li{
+    margin-left: 1em;
+    list-style: none;
+}
+.pagerNew li > a, .pagerNew li > span{
+    background-color: #17c07a;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 14px;
+    color: #fff;
+    font-size: 20px;
+}
+.pagerNew li > a:hover, .pagerNewPrev li a:hover{
+    text-decoration: none;
+    background-color: #17c07a;
+}
+.pagerNewPrev li > a, .pagerNewPrev li > span{
+    background-color: #a0a0a0;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 14px;
+    color: #fff;
+    font-size: 28px;
+    line-height: 40px;
+}
+
+/*************top steps end here************/
+
+.message {    
+    width: 350px;
+    height: 100px;
+}
+
+.name-area{
+    padding: 5px;
+    border-radius: 4px;
+    border: solid 1px #ccc;
+    height: 49px;
+}
+
+.container{
+width: 96%;
+margin: 2% auto;
+display: table;
+
+}
+.container .row{
+width: 100%;
+display: table-row;
+border: solid 1px #9e9e9e;
+background-color:rgba(163, 245, 203, 0.42);
+
+}
+.container .row .innerDiv{
+width: 100%;
+display: block;
+padding: 10px;
+border-bottom-right-radius:10px;
+border-bottom-left-radius:10px;
+}
+.header{
+width: 100.1%;
+display: block;
+margin: 0;
+padding: 10px;
+color: white;
+font-size: 20px;
+font-weight: 400;
+background:#17c07a;
+border-top-right-radius:10px;
+border-top-left-radius:10px;
+}
+</style>
+</head>
+<body>
+   <apex:pageMessage summary="Your eCourier licence has expired, Please contact us at sales@mirketa.com to renew your license." rendered="{!expired}" severity="info" strength="3" />
+
+<apex:form id="frm">
+                    <!-------------------------------------------------------Step1-------------------------------------------------------------------->
+                    
+       <apex:outputPanel >
+        <form class="form-horizontal"> 
+                           
+                  
+
+                    <div class="container" style="margin-right: 27px;float: right;">
+                    
+                        <h2 class="header">Selected Report Type</h2>
+                        
+                            <div class="row" style="margin-left: 6%;width: 100%;">
+                                    <div class="innerDiv">                           
+                                       <br/>                                                  
+                                    <apex:outputLabel style="padding-right:160px;">Report Type</apex:outputLabel><apex:outputField value="{!cr.ScheduleReports__Report_Type__c}"/>                                                                     
+                                    </div>
+                            </div>
+                    </div>  
+                                
+         </form>
+         </apex:outputPanel>
+           
+           <!-------------------------------------------------------Step2-------------------------------------------------------------------->
+           
+    <apex:outputPanel >
+
+                   <form class="form-horizontal">
+                           
+
+                    <div class="container" style="margin-right: 27px;float: right;">
+                       
+                        <h2 class="header">Basic Information</h2>
+
+                               <div class="row" style="margin-left: 6%;width: 64%;">
+                                
+                                 <br/>
+                                   <div class="innerDiv" style="float: left; width: 50%;">
+                                     <apex:outputLabel style="padding-right: 202px;">Report</apex:outputLabel>  
+                                     <apex:outputText value="{!repName}" rendered="{!cr.ScheduleReports__Report_Type__c=='Standard Report'}"></apex:outputText>
+                                     <apex:outputField value="{!cr.ScheduleReports__Report_Name__c}" rendered="{!cr.ScheduleReports__Report_Type__c=='Visualforce Report'}"/>                
+                                     <br></br>
+                                     <apex:outputLabel style="padding-right: 99px;">Attachment Extension</apex:outputLabel><apex:outputField value="{!cr.ScheduleReports__Attachment_Extension__c}"/>
+                                     <br></br>
+                                     <apex:outputLabel style="padding-right: 137px">Scheduler Name</apex:outputLabel><apex:outputText style="width:167px;" value="{!tempSchName}"/>
+                                     <br></br>
+                                     <apex:outputLabel style="padding-right: 170px">Description</apex:outputLabel><apex:outputText style="width:167px;" value="{!tempDesc}" />  
+                                   </div>
+                                   
+                                   <div class="innerDiv" style="float: left; width: 50%;">
+                                         <apex:outputLabel style="padding-right: 183px;">Frequency</apex:outputLabel><apex:outputField value="{!cr.ScheduleReports__Frequency__c}"/>
+                                         <br></br>
+                                         <apex:outputLabel style="padding-right: 155px;">First Run Hour</apex:outputLabel><apex:outputField value="{!cr.ScheduleReports__Hour__c}"/>
+                                         <br></br>
+                                         <apex:outputLabel style="padding-right: 209px;">Minute</apex:outputLabel><apex:outputField value="{!cr.ScheduleReports__Minute__c}"/>         
+                                         <br></br>
+                                         <apex:outputLabel style="padding-right: 130px;">Date of the Month</apex:outputLabel><apex:outputField value="{!cr.ScheduleReports__Date_of_the_Month__c}"/>
+                                         <br></br>
+                                         <apex:outputLabel style="padding-right: 144px;">Day of the Week</apex:outputLabel><apex:outputField value="{!cr.ScheduleReports__Day_of_the_Week__c}"/>
+                                   </div>                        
+                           </div>
+                     
+                         </div>                              
+         </form>    
+    </apex:outputPanel>
+    
+    <!-------------------------------------------------------Step3-------------------------------------------------------------------->
+    
+    <apex:outputPanel >
+                            
+
+                <div class="container" style="margin-right: 27px;float: right;">
+                        
+                        <h2 class="header">Email</h2>
+
+                        <div class="row" style="margin-left: 6%;width: 64%;">
+                            <p></p>
+                            <br/>
+                            <div style="width:36%;float: left;">
+                                 <apex:outputLabel style="padding-right: 209px;padding-left:10px;">Subject</apex:outputLabel>
+                                 </div>
+                                 <div style="width:36%;float: left;">
+                                 <apex:outputText style="width:167px;" value="{!tempSubject}"/>
+                                 </div>
+                                 <br></br>
+                                     <div class="innerDiv" style="width:100%">
+                                     <div style="width:36%;float: left;">
+                                     <apex:outputLabel style="padding-right: 205px;padding-left: 2px;">Body</apex:outputLabel>
+                                     </div>
+                                     <div style="width:36%;float: left;margin-left: -3px;">
+                                     <apex:outputText style="width:167px;" value="{!tempBody}"/> 
+                                     </div>                               
+                                 </div>
+                            </div>
+                        </div>     
+       
+                  
+    </apex:outputPanel>
+    
+    <!-------------------------------------------------------Step4-------------------------------------------------------------------->
+    
+    <apex:outputPanel >
+                               
+
+                <div class="container" style="margin-right: 27px;float: right;">
+                        
+                        <h2 class="header">Selected Recipients</h2>
+                        <div class="row" style="margin-left: 6%;width: 64%;">
+                            <br/>
+                            <div class="innerDiv">
+                                <apex:outputPanel id="outpnlList">
+                                        <table>
+                                             <tr>
+                                                <th style="font-size:16px;">Name</th>
+                                                <th style="padding-left: 114px;font-size:16px;">Email Address</th>                                                                               
+                                             </tr>
+                                        <apex:repeat var="rec" value="{!allRecipnts}">                                            
+                                             <tr>
+                                                <td>{!rec['Recipient_Name__c']}</td>
+                                                <td style="padding-left: 114px;">{!rec['Email_ID__c']}</td>                                                
+                                             </tr>                                             
+                                        </apex:repeat>
+                                        </table>                           
+                                </apex:outputPanel>
+                                </div>                                             
+                            </div>
+                        </div>     
+                   
+    </apex:outputPanel>
+    
+    <!-------------------------------------------------------Step5-------------------------------------------------------------------->
+    
+    <apex:outputPanel >
+          <apex:actionFunction name="myDelete" action="{!deleteScheduler}"/>
+          <apex:actionFunction name="myEdit" action="{!edit}"/>
+          <apex:actionFunction name="myEnable" action="{!enableScheduler}"/>
+          <apex:actionFunction name="myDisable" action="{!disableScheduler}"/>
+                             
+      
+                <div class="container" style="margin-right: 27px;float: right;">
+                      
+                        <h2 class="header">Scheduler Enabled</h2>
+
+                        <div class="row" style="margin-left: 6%;width: 64%;">
+                            <label class="control-label select-object" style="margin-left: 6%;width: 64%;color:black;">
+                                <apex:outputText rendered="{!cr.ScheduleReports__Enabled__c}" style="font-size:6px;color:#6b6969;">Yes</apex:outputText><apex:outputText rendered="{!!cr.ScheduleReports__Enabled__c}" style="font-size:6px;color:#6b6969;">No</apex:outputText>
+                            </label>                              
+                        </div>
+                </div>     
+                        <div class="row">
+                            <div class="col-xs-2" style="float: right">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;">
+                                    <li style="padding-left: 0px;"><a href="javascript:void(0)" onclick="myEdit();">Edit</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-2" style="float: right">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;">
+                                    <li style="padding-left: 44px;"><a href="javascript:void(0)" onclick="confirmDelete();">Delete</a></li>                                    
+                                </ul>
+                            </div>
+                            <div class="col-xs-2" style="{!IF(cr.ScheduleReports__Enabled__c, 'display:none', 'display:block;float: right;padding-left: 13px;')}">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;margin-left: -164px;">
+                                    <li style="padding-left: 135px;"><a href="javascript:void(0)" onclick="confirmEnable();">Enable Scheduler</a></li>                                    
+                                </ul>
+                            </div>
+                            <div class="col-xs-2" style="{!IF(cr.ScheduleReports__Enabled__c, 'display:block;float: right;padding-left: 13px;', 'display:none')}">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;margin-left: -330px;">
+                                    <li style="padding-left: 297px;"><a href="javascript:void(0)" onclick="confirmDisable();">Disable Scheduler</a></li>                                    
+                                </ul>
+                            </div>
+                            <div class="col-xs-2" style="float: right;">
+                                <ul class="pagerNew" style="padding: 0px; margin: 0px;margin-left: -369px;">
+                                    <li style="padding-left: 218px;"><a href="/apex/ScheduleReports__ReportScheduler">Create New Scheduler</a></li>                                    
+                                </ul>
+                            </div>
+                        </div>
+                    
+              </apex:outputPanel>           
+      </apex:form>
+      
+    </body>
+  </html> 
+</apex:page>
